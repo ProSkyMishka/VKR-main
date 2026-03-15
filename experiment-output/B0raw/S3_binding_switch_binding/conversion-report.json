@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S3_binding/switch_binding.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S3_binding_switch_binding",
+    "startedAt": "2026-03-14T21:02:37.995Z",
+    "finishedAt": "2026-03-14T21:02:48.998Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0raw",
+    "totalPromptTokens": 440,
+    "totalCompletionTokens": 967,
+    "totalTokens": 1407
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "SwitchView",
+          "params": [],
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          },
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "(skipped)"
+            },
+            "children": [],
+            "modifiers": []
+          }
+        }
+      ],
+      "entryViewName": "SwitchView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "SwitchView"
+    ],
+    "entryViewName": "SwitchView",
+    "swiftSourcePreview": "import SwiftUI\nstruct SwitchView: View {\n    @Binding var on: Bool\n    var body: some View {\n        Toggle(\"Switch\", isOn: $on)\n    }\n}\nstruct ContentView: View {\n    @State private var on = false\n    var body: some View {\n        VStack {\n            SwitchView(on: $on)\n            Text(on ? \"On\" : \"Off\")\n        }.padding()\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "entryViewName": "SwitchView",
+      "skeleton": [
+        {
+          "viewName": "SwitchView",
+          "propsInterface": "",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "",
+          "imports": []
+        }
+      ],
+      "unresolved": []
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1398,
+    "rawResponseLength": 2554,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 435
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 131
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 209
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 166
+      },
+      {
+        "path": "src/views/SwitchView.tsx",
+        "contentLength": 643
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

@@ -1,0 +1,194 @@
+{
+  "meta": {
+    "inputFile": "fixtures/sample2.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/output-app5",
+    "startedAt": "2026-02-26T19:57:43.563Z",
+    "finishedAt": "2026-02-26T19:58:01.584Z",
+    "success": true
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "ZStack",
+            "props": {},
+            "modifiers": [],
+            "children": [
+              {
+                "type": "Color",
+                "props": {
+                  "name": "brown"
+                },
+                "modifiers": [
+                  {
+                    "name": "ignoresSafeArea"
+                  }
+                ],
+                "children": []
+              },
+              {
+                "type": "VStack",
+                "props": {
+                  "spacing": 12
+                },
+                "modifiers": [
+                  {
+                    "name": "padding"
+                  }
+                ],
+                "children": [
+                  {
+                    "type": "Text",
+                    "props": {
+                      "content": "Hello, SwiftUI!"
+                    },
+                    "modifiers": [],
+                    "children": []
+                  },
+                  {
+                    "type": "Button",
+                    "props": {
+                      "label": "Count: \\(count)"
+                    },
+                    "modifiers": [],
+                    "children": []
+                  }
+                ]
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "count",
+                "type": "Int",
+                "initial": "0"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct ContentView: View {\n    @State private var count = 0\n\n    var body: some View {\n        ZStack {\n            Color.brown.ignoresSafeArea()\n\n            VStack(spacing: 12) {\n                Text(\"Hello, SwiftUI!\")\n                Button(\"Count: \\(count)\") {\n                    count += 1\n                }\n            }\n            .padding()\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [count, setCount] = useState<number>(0);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={{ position: 'relative', minHeight: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n      <div style={{ position: 'absolute', inset: 0, backgroundColor: '#8B4513' }} />\n      <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>\n        <span>Hello, SwiftUI!</span>\n        <button type=\"button\" onClick={() => {}} style={{ border: 'none', background: 'none', color: '#007AFF', cursor: 'pointer', padding: 0, fontSize: 'inherit' }}>\n\n        </button>\n      </div>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body.children[0]",
+          "description": "Unresolved modifier: .ignoresSafeArea"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body.children[0]",
+        "description": "Unresolved modifier: .ignoresSafeArea"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 3,
+    "retrievedIds": [
+      "vstack-text",
+      "state-button",
+      "binding"
+    ],
+    "retrievedTags": [
+      [
+        "layout",
+        "VStack",
+        "Text"
+      ],
+      [
+        "state",
+        "Button",
+        "@State"
+      ],
+      [
+        "@Binding",
+        "state"
+      ]
+    ],
+    "ragContextLength": 908
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 3428,
+    "rawResponseLength": 2510,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 326
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 134
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 336
+      },
+      {
+        "path": "index.html",
+        "contentLength": 298
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 205
+      },
+      {
+        "path": "src/views/View5.tsx",
+        "contentLength": 113
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 903
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

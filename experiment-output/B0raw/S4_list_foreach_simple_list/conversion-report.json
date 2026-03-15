@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S4_list_foreach/simple_list.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S4_list_foreach_simple_list",
+    "startedAt": "2026-03-14T21:08:49.732Z",
+    "finishedAt": "2026-03-14T21:09:00.775Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0raw",
+    "totalPromptTokens": 429,
+    "totalCompletionTokens": 914,
+    "totalTokens": 1343
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          },
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "(skipped)"
+            },
+            "children": [],
+            "modifiers": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct Item: Identifiable {\n    let id = UUID()\n    let name: String\n}\n\nstruct ContentView: View {\n    let items = [\n        Item(name: \"Apple\"),\n        Item(name: \"Banana\"),\n        Item(name: \"Cherry\")\n    ]\n\n    var body: some View {\n        List(items) { item in\n            Text(item.name)\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "entryViewName": "ContentView",
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "",
+          "imports": []
+        }
+      ],
+      "unresolved": []
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1393,
+    "rawResponseLength": 2408,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 441
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 131
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 322
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 169
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 453
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

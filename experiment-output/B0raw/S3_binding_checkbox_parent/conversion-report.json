@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S3_binding/checkbox_parent.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S3_binding_checkbox_parent",
+    "startedAt": "2026-03-14T21:00:30.592Z",
+    "finishedAt": "2026-03-14T21:00:42.161Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0raw",
+    "totalPromptTokens": 425,
+    "totalCompletionTokens": 947,
+    "totalTokens": 1372
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "CheckboxView",
+          "params": [],
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          },
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "(skipped)"
+            },
+            "children": [],
+            "modifiers": []
+          }
+        }
+      ],
+      "entryViewName": "CheckboxView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "CheckboxView"
+    ],
+    "entryViewName": "CheckboxView",
+    "swiftSourcePreview": "import SwiftUI\nstruct CheckboxView: View {\n    @Binding var isChecked: Bool\n    var body: some View {\n        Toggle(\"Item\", isOn: $isChecked)\n    }\n}\nstruct ContentView: View {\n    @State private var isChecked = false\n    var body: some View {\n        CheckboxView(isChecked: $isChecked).padding()\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "entryViewName": "CheckboxView",
+      "skeleton": [
+        {
+          "viewName": "CheckboxView",
+          "propsInterface": "",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "",
+          "imports": []
+        }
+      ],
+      "unresolved": []
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1372,
+    "rawResponseLength": 2606,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 436
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 152
+      },
+      {
+        "path": "src/views/CheckboxView.tsx",
+        "contentLength": 691
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

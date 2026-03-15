@@ -1,0 +1,134 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S4_list_foreach/two_sections.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S4_list_foreach_two_sections",
+    "startedAt": "2026-03-14T21:39:49.047Z",
+    "finishedAt": "2026-03-14T21:40:07.672Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0",
+    "totalPromptTokens": 392,
+    "totalCompletionTokens": 904,
+    "totalTokens": 1296
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "List {\n            Section(\"A\") { Text(\"A1\"); Text(\"A2\") }\n            Section(\"B\") { Text(\"B1\"); Text(\"B2\") }\n        }"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    var body: some View {\n        List {\n            Section(\"A\") { Text(\"A1\"); Text(\"A2\") }\n            Section(\"B\") { Text(\"B1\"); Text(\"B2\") }\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    {/* Custom: List {\n            Section(\"A\") { Text(\"A1\"); Text(\"A2\") }\n            Section(\" */}\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "List {\n            Section(\"A\") { Text(\"A1\"); Text(\"A2\") }\n            Section(\"B\") { Text(\"B1\"); Text(\"B2\") }\n        }"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "List {\n            Section(\"A\") { Text(\"A1\"); Text(\"A2\") }\n            Section(\"B\") { Text(\"B1\"); Text(\"B2\") }\n        }"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1268,
+    "rawResponseLength": 2372,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 441
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 322
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 210
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 149
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 449
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

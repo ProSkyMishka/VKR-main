@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S6_animations/conditional_anim.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S6_animations_conditional_anim",
+    "startedAt": "2026-03-14T21:13:29.420Z",
+    "finishedAt": "2026-03-14T21:13:41.134Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0raw",
+    "totalPromptTokens": 418,
+    "totalCompletionTokens": 855,
+    "totalTokens": 1273
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          },
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "(skipped)"
+            },
+            "children": [],
+            "modifiers": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    @State private var show = true\n    var body: some View {\n        VStack {\n            if show {\n                Text(\"Visible\").transition(.opacity)\n            }\n            Button(\"Toggle\") {\n                withAnimation(.easeInOut(duration: 0.3)) { show.toggle() }\n            }\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "entryViewName": "ContentView",
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "",
+          "imports": []
+        }
+      ],
+      "unresolved": []
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1410,
+    "rawResponseLength": 2315,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 441
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 314
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 224
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 149
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 386
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S3_binding/child_toggle.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S3_binding_child_toggle",
+    "startedAt": "2026-03-14T21:01:18.355Z",
+    "finishedAt": "2026-03-14T21:01:30.039Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0raw",
+    "totalPromptTokens": 445,
+    "totalCompletionTokens": 961,
+    "totalTokens": 1406
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ChildView",
+          "params": [],
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          },
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "(skipped)"
+            },
+            "children": [],
+            "modifiers": []
+          }
+        }
+      ],
+      "entryViewName": "ChildView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ChildView"
+    ],
+    "entryViewName": "ChildView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct ChildView: View {\n    @Binding var isOn: Bool\n\n    var body: some View {\n        Toggle(\"Child\", isOn: $isOn)\n    }\n}\n\nstruct ContentView: View {\n    @State private var isOn = false\n\n    var body: some View {\n        VStack {\n            ChildView(isOn: $isOn)\n            Text(\"Parent: \\(isOn ? \"On\" : \"Off\")\")\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "entryViewName": "ChildView",
+      "skeleton": [
+        {
+          "viewName": "ChildView",
+          "propsInterface": "",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "",
+          "imports": []
+        }
+      ],
+      "unresolved": []
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1412,
+    "rawResponseLength": 2543,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 435
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 163
+      },
+      {
+        "path": "src/views/ChildView.tsx",
+        "contentLength": 621
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

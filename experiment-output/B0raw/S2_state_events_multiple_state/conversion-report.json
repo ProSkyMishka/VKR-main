@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S2_state_events/multiple_state.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S2_state_events_multiple_state",
+    "startedAt": "2026-03-14T20:56:34.862Z",
+    "finishedAt": "2026-03-14T20:56:46.225Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0raw",
+    "totalPromptTokens": 448,
+    "totalCompletionTokens": 916,
+    "totalTokens": 1364
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          },
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "(skipped)"
+            },
+            "children": [],
+            "modifiers": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct ContentView: View {\n    @State private var a = 0\n    @State private var b = \"\"\n    @State private var flag = false\n\n    var body: some View {\n        VStack {\n            Text(\"a: \\(a)\")\n            Text(\"b: \\(b)\")\n            Text(flag ? \"Yes\" : \"No\")\n            Button(\"Update\") {\n                a += 1\n                b = \"\\(a)\"\n                flag.toggle()\n            }\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "entryViewName": "ContentView",
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "",
+          "imports": []
+        }
+      ],
+      "unresolved": []
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1482,
+    "rawResponseLength": 2398,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 435
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 169
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 468
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

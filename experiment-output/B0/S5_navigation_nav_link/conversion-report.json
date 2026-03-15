@@ -1,0 +1,175 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S5_navigation/nav_link.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S5_navigation_nav_link",
+    "startedAt": "2026-03-14T21:42:15.617Z",
+    "finishedAt": "2026-03-14T21:42:26.393Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0",
+    "totalPromptTokens": 423,
+    "totalCompletionTokens": 893,
+    "totalTokens": 1316
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "DetailView",
+          "params": [],
+          "body": {
+            "type": "Text",
+            "props": {
+              "content": "Detail"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        },
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "NavigationView",
+            "props": {},
+            "modifiers": [],
+            "children": [
+              {
+                "type": "NavigationLink",
+                "props": {},
+                "modifiers": [
+                  {
+                    "name": "navigationTitle",
+                    "args": [
+                      "\"Root\""
+                    ]
+                  }
+                ],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 2,
+    "viewNames": [
+      "DetailView",
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct DetailView: View {\n    var body: some View {\n        Text(\"Detail\")\n    }\n}\n\nstruct ContentView: View {\n    var body: some View {\n        NavigationView {\n            VStack {\n                NavigationLink(\"Go to Detail\") {\n                    DetailView()\n                }\n            }\n            .navigationTitle(\"Root\")\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "DetailView",
+          "propsInterface": "interface DetailViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <span>Detail</span>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div>\n      <a href=\"#\">\n\n      </a>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body.children[0]",
+          "description": "Unresolved modifier: .navigationTitle"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 2,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body.children[0]",
+        "description": "Unresolved modifier: .navigationTitle"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1443,
+    "rawResponseLength": 2448,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 436
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 136
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 379
+      },
+      {
+        "path": "src/views/DetailView.tsx",
+        "contentLength": 137
+      }
+    ],
+    "filesCount": 8
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

@@ -1,0 +1,160 @@
+added 215 packages, and audited 277 packages in 3s
+
+83 packages are looking for funding
+  run `npm fund` for details
+
+5 vulnerabilities (1 low, 4 moderate)
+
+To address all issues (including breaking changes), run:
+  npm audit fix --force
+
+Run `npm audit` for details.
+
+> swiftui-to-vite-react@0.0.0 test
+> vitest run
+
+
+ RUN  v1.6.1 /Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S6_animations_with_animation
+
+ ❯ src/App.spec.tsx  (1 test | 1 failed) 24ms
+   ❯ src/App.spec.tsx > S6 animations: with_animation > has toggle and content
+     → Found multiple elements with the text: /Slide/i
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<div[39m
+  [33mclass[39m=[32m"text-4xl font-bold mb-4"[39m
+[36m>[39m
+  [0mSlide[0m
+[36m</div>[39m
+
+Ignored nodes: comments, script, style
+[36m<div[39m
+  [33mclass[39m=[32m"text-4xl font-bold"[39m
+  [33mstyle[39m=[32m"transform: translateX(0px);"[39m
+[36m>[39m
+  [0mSlide[0m
+[36m</div>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col items-center justify-center h-screen"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"text-4xl font-bold mb-4"[39m
+      [36m>[39m
+        [0mSlide[0m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"text-4xl font-bold"[39m
+        [33mstyle[39m=[32m"transform: translateX(0px);"[39m
+      [36m>[39m
+        [0mSlide[0m
+      [36m</div>[39m
+      [36m<button[39m
+        [33mclass[39m=[32m"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"[39m
+      [36m>[39m
+        [0mMove[0m
+      [36m</button>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+
+ Test Files  1 failed (1)
+      Tests  1 failed (1)
+   Start at  00:17:18
+   Duration  731ms (transform 85ms, setup 41ms, collect 190ms, tests 24ms, environment 301ms, prepare 51ms)
+
+
+npm warn deprecated whatwg-encoding@3.1.1: Use @exodus/bytes instead for a more spec-conformant and faster implementation
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 1 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/App.spec.tsx > S6 animations: with_animation > has toggle and content
+TestingLibraryElementError: Found multiple elements with the text: /Slide/i
+
+Here are the matching elements:
+
+Ignored nodes: comments, script, style
+[36m<div[39m
+  [33mclass[39m=[32m"text-4xl font-bold mb-4"[39m
+[36m>[39m
+  [0mSlide[0m
+[36m</div>[39m
+
+Ignored nodes: comments, script, style
+[36m<div[39m
+  [33mclass[39m=[32m"text-4xl font-bold"[39m
+  [33mstyle[39m=[32m"transform: translateX(0px);"[39m
+[36m>[39m
+  [0mSlide[0m
+[36m</div>[39m
+
+(If this is intentional, then use the `*AllBy*` variant of the query (like `queryAllByText`, `getAllByText`, or `findAllByText`)).
+
+Ignored nodes: comments, script, style
+[36m<body>[39m
+  [36m<div>[39m
+    [36m<div[39m
+      [33mclass[39m=[32m"flex flex-col items-center justify-center h-screen"[39m
+    [36m>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"text-4xl font-bold mb-4"[39m
+      [36m>[39m
+        [0mSlide[0m
+      [36m</div>[39m
+      [36m<div[39m
+        [33mclass[39m=[32m"text-4xl font-bold"[39m
+        [33mstyle[39m=[32m"transform: translateX(0px);"[39m
+      [36m>[39m
+        [0mSlide[0m
+      [36m</div>[39m
+      [36m<button[39m
+        [33mclass[39m=[32m"bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mt-4"[39m
+      [36m>[39m
+        [0mMove[0m
+      [36m</button>[39m
+    [36m</div>[39m
+  [36m</div>[39m
+[36m</body>[39m
+ ❯ Object.getElementError node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/config.js:37:19
+ ❯ getElementError node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:20:35
+ ❯ getMultipleElementsFoundError node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:23:10
+ ❯ node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:55:13
+ ❯ getByText node_modules/@testing-library/react/node_modules/@testing-library/dom/dist/query-helpers.js:95:19
+ ❯ src/App.spec.tsx:10:17
+      8|   const user = userEvent.setup();
+      9|   render(<App />);
+     10|   expect(screen.getByText(/Slide/i)).toBeInTheDocument();
+       |                 ^
+     11|   await user.click(screen.getByRole('button', { name: /Move/i }));
+     12|   expect(document.body.textContent).toBeTruthy();
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/1]⎯
+
+node:internal/errors:983
+  const err = new Error(message);
+              ^
+
+Error: Command failed: npm test
+    at genericNodeError (node:internal/errors:983:15)
+    at wrappedFn (node:internal/errors:537:14)
+    at checkExecSyncError (node:child_process:882:11)
+    at execSync (node:child_process:954:15)
+    at file:///Users/mprozorskiy/Desktop/VKR/scripts/inject-and-run-tests.js:121:1
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5) {
+  status: 1,
+  signal: null,
+  output: [ null, null, null ],
+  pid: 6797,
+  stdout: null,
+  stderr: null
+}
+
+Node.js v22.13.1

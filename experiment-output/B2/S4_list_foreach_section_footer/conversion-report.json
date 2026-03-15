@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S4_list_foreach/section_footer.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B2/S4_list_foreach_section_footer",
+    "startedAt": "2026-03-14T22:37:39.239Z",
+    "finishedAt": "2026-03-14T22:37:49.542Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B2",
+    "totalPromptTokens": 1283,
+    "totalCompletionTokens": 897,
+    "totalTokens": 2180
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "List {\n            Section(header: Text(\"Header\"), footer: Text(\"Footer\")) {\n                Text(\"Row 1\")\n                Text(\"Row 2\")\n            }\n        }"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    var body: some View {\n        List {\n            Section(header: Text(\"Header\"), footer: Text(\"Footer\")) {\n                Text(\"Row 1\")\n                Text(\"Row 2\")\n            }\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    {/* Custom: List {\n            Section(header: Text(\"Header\"), footer: Text(\"Footer\")) {\n    */}\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "List {\n            Section(header: Text(\"Header\"), footer: Text(\"Footer\")) {\n                Text(\"Row 1\")\n                Text(\"Row 2\")\n            }\n        }"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "List {\n            Section(header: Text(\"Header\"), footer: Text(\"Footer\")) {\n                Text(\"Row 1\")\n                Text(\"Row 2\")\n            }\n        }"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 3,
+    "retrievedIds": [
+      "s1-vstack-text",
+      "s1-hstack",
+      "s1-zstack-color"
+    ],
+    "retrievedTags": [
+      [
+        "layout",
+        "VStack",
+        "Text",
+        "S1"
+      ],
+      [
+        "layout",
+        "HStack",
+        "Text",
+        "S1"
+      ],
+      [
+        "layout",
+        "ZStack",
+        "Color",
+        "Text",
+        "S1"
+      ]
+    ],
+    "ragContextLength": 1110
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 4143,
+    "rawResponseLength": 2419,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 436
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 161
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 224
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 120
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 507
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

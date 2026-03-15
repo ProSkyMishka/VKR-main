@@ -1,0 +1,117 @@
+{
+  "meta": {
+    "inputFile": "datasets/S1_layout/text_caption.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B3/S1_layout_text_caption",
+    "startedAt": "2026-03-14T18:24:21.578Z",
+    "finishedAt": "2026-03-14T18:24:21.809Z",
+    "success": false,
+    "errors": [
+      "LLM generation: OpenRouter API error 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 8192 tokens, but can only afford 7527. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3ACTuIpdW2g1KbGLjUNXYh4CxGO\"}"
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B3"
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {},
+            "modifiers": [],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Title"
+                },
+                "modifiers": [
+                  {
+                    "name": "font",
+                    "args": [
+                      ".headline"
+                    ]
+                  },
+                  {
+                    "name": "font",
+                    "args": [
+                      ".caption"
+                    ]
+                  },
+                  {
+                    "name": "foregroundColor",
+                    "args": [
+                      ".secondary"
+                    ]
+                  }
+                ],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    var body: some View {\n        VStack {\n            Text(\"Title\").font(.headline)\n            Text(\"Caption\").font(.caption).foregroundColor(.secondary)\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 8 }>\n      <span style={ color: 'var(--color-secondary, #333)' }>Title</span>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 0
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 0,
+    "rawResponseLength": 0,
+    "filesGenerated": [],
+    "filesCount": 0
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

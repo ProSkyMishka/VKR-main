@@ -1,0 +1,215 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S1_layout/text_modifiers.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S1_layout_text_modifiers",
+    "startedAt": "2026-03-14T21:21:23.433Z",
+    "finishedAt": "2026-03-14T21:21:34.220Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0",
+    "totalPromptTokens": 458,
+    "totalCompletionTokens": 857,
+    "totalTokens": 1315
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {
+              "spacing": 24
+            },
+            "modifiers": [
+              {
+                "name": "padding"
+              }
+            ],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Title"
+                },
+                "modifiers": [
+                  {
+                    "name": "font",
+                    "args": [
+                      ".title"
+                    ]
+                  },
+                  {
+                    "name": "bold"
+                  },
+                  {
+                    "name": "font",
+                    "args": [
+                      ".system(size: 18"
+                    ]
+                  },
+                  {
+                    "name": "foregroundColor",
+                    "args": [
+                      ".gray"
+                    ]
+                  },
+                  {
+                    "name": "frame",
+                    "args": [
+                      "width: 200, height: 80"
+                    ]
+                  },
+                  {
+                    "name": "background",
+                    "args": [
+                      "Color.orange.opacity(0.3"
+                    ]
+                  },
+                  {
+                    "name": "cornerRadius",
+                    "args": [
+                      "8"
+                    ]
+                  }
+                ],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Box"
+                },
+                "modifiers": [
+                  {
+                    "name": "frame",
+                    "args": [
+                      "width: 200, height: 80"
+                    ]
+                  },
+                  {
+                    "name": "background",
+                    "args": [
+                      "Color.orange.opacity(0.3"
+                    ]
+                  },
+                  {
+                    "name": "cornerRadius",
+                    "args": [
+                      "8"
+                    ]
+                  }
+                ],
+                "children": []
+              },
+              {
+                "type": "Color",
+                "props": {
+                  "name": "orange"
+                },
+                "modifiers": [
+                  {
+                    "name": "opacity",
+                    "args": [
+                      "0.3"
+                    ]
+                  }
+                ],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct ContentView: View {\n    var body: some View {\n        VStack(spacing: 24) {\n            Text(\"Title\")\n                .font(.title)\n                .bold()\n            Text(\"Subtitle\")\n                .font(.system(size: 18))\n                .foregroundColor(.gray)\n            Text(\"Box\")\n                .frame(width: 200, height: 80)\n                .background(Color.orange.opacity(0.3))\n                .cornerRadius(8)\n        }\n        .padding()\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 24, alignItems: 'center', padding: 16 }>\n      <div style={ width: 200, height: 80, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg-orange.opacity(0.3, #eee)', borderRadius: 8 }>\n        <span style={ fontSize: 18, color: '#808080' }>Title</span>\n      </div>\n      <div style={ width: 200, height: 80, display: 'flex', alignItems: 'center', justifyContent: 'center', backgroundColor: 'var(--bg-orange.opacity(0.3, #eee)', borderRadius: 8 }>\n        <span style={}>Box</span>\n      </div>\n      <div style={{ position: 'absolute', inset: 0, backgroundColor: '#FFA500', zIndex: 0 }} />\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1548,
+    "rawResponseLength": 2291,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 436
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 224
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 136
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 392
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

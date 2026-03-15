@@ -1,0 +1,120 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S4_list_foreach/list_three.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S4_list_foreach_list_three",
+    "startedAt": "2026-03-14T21:36:44.572Z",
+    "finishedAt": "2026-03-14T21:36:54.366Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0",
+    "totalPromptTokens": 410,
+    "totalCompletionTokens": 898,
+    "totalTokens": 1308
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "List",
+            "props": {
+              "dataBinding": "items"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct Item: Identifiable { let id = UUID(); let t: String }\nstruct ContentView: View {\n    let items = [Item(t: \"X\"), Item(t: \"Y\"), Item(t: \"Z\")]\n    var body: some View {\n        List(items) { i in Text(i.t) }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <ul>\n\n    </ul>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1298,
+    "rawResponseLength": 2349,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 441
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 322
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 224
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 136
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 425
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

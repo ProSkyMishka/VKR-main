@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "inputFile": "datasets/S3_binding/binding_int.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B2/S3_binding_binding_int",
+    "startedAt": "2026-03-14T18:23:47.580Z",
+    "finishedAt": "2026-03-14T18:23:47.931Z",
+    "success": false,
+    "errors": [
+      "LLM generation: OpenRouter API error 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 8192 tokens, but can only afford 7527. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3ACTuIpdW2g1KbGLjUNXYh4CxGO\"}"
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B2"
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "StepperView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "Stepper(\"N\", value: $n, in: 0...100)\n        Text(\"\\(n)\")"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": [
+              {
+                "name": "n",
+                "type": "Int"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "StepperView(n: $n).padding()"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "n",
+                "type": "Int",
+                "initial": "0"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 2,
+    "viewNames": [
+      "StepperView",
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct StepperView: View {\n    @Binding var n: Int\n    var body: some View {\n        Stepper(\"N\", value: $n, in: 0...100)\n        Text(\"\\(n)\")\n    }\n}\nstruct ContentView: View {\n    @State private var n = 0\n    var body: some View { StepperView(n: $n).padding() }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "StepperView",
+          "propsInterface": "interface StepperViewProps {\n  n: number;\n  onNChange?: (value: number) => void;\n}",
+          "stateHooks": [],
+          "bindingProps": [
+            "n, onNChange"
+          ],
+          "jsxSkeleton": "    {/* Custom: Stepper(\"N\", value: $n, in: 0...100)\n        Text(\"\\(n)\") */}",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [n, setN] = useState<number>(0);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "    {/* Custom: StepperView(n: $n).padding() */}",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "StepperView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "Stepper(\"N\", value: $n, in: 0...100)\n        Text(\"\\(n)\")"
+        },
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "StepperView(n: $n).padding()"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 2,
+    "unresolvedCount": 2,
+    "unresolvedList": [
+      {
+        "viewName": "StepperView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "Stepper(\"N\", value: $n, in: 0...100)\n        Text(\"\\(n)\")"
+      },
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "StepperView(n: $n).padding()"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 0
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 0,
+    "rawResponseLength": 0,
+    "filesGenerated": [],
+    "filesCount": 0
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

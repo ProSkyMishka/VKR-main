@@ -1,0 +1,105 @@
+{
+  "meta": {
+    "inputFile": "datasets/S4_list_foreach/list_with_sections.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B3/S4_list_foreach_list_with_sections",
+    "startedAt": "2026-03-14T18:24:47.850Z",
+    "finishedAt": "2026-03-14T18:24:48.060Z",
+    "success": false,
+    "errors": [
+      "LLM generation: OpenRouter API error 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 8192 tokens, but can only afford 7527. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3ACTuIpdW2g1KbGLjUNXYh4CxGO\"}"
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B3"
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "List {\n            Section(\"Section A\") {\n                ForEach(sectionA) { row in\n                    Text(row.title)\n                }\n            }\n            Section(\"Section B\") {\n                ForEach(sectionB) { row in\n                    Text(row.title)\n                }\n            }\n        }"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct Row: Identifiable {\n    let id = UUID()\n    let title: String\n}\n\nstruct ContentView: View {\n    let sectionA = [Row(title: \"A1\"), Row(title: \"A2\")]\n    let sectionB = [Row(title: \"B1\"), Row(title: \"B2\")]\n\n    var body: some View {\n        List {\n            Section(\"Section A\") {\n                ForEach(sectionA) { row in\n                    Text(row.title)\n                }\n            }\n            Section(\"Section B\") {\n                ForEach(sectionB) { row in\n                    Text(row.title)\n                }\n            }\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "    {/* Custom: List {\n            Section(\"Section A\") {\n                ForEach(sectionA) { ro */}",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "List {\n            Section(\"Section A\") {\n                ForEach(sectionA) { row in\n                    Text(row.title)\n                }\n            }\n            Section(\"Section B\") {\n                ForEach(sectionB) { row in\n                    Text(row.title)\n                }\n            }\n "
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "List {\n            Section(\"Section A\") {\n                ForEach(sectionA) { row in\n                    Text(row.title)\n                }\n            }\n            Section(\"Section B\") {\n                ForEach(sectionB) { row in\n                    Text(row.title)\n                }\n            }\n "
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 0
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 0,
+    "rawResponseLength": 0,
+    "filesGenerated": [],
+    "filesCount": 0
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S3_binding/binding_double.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S3_binding_binding_double",
+    "startedAt": "2026-03-14T21:28:51.180Z",
+    "finishedAt": "2026-03-14T21:29:05.063Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0",
+    "totalPromptTokens": 446,
+    "totalCompletionTokens": 986,
+    "totalTokens": 1432
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "SliderLabel",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {},
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": [
+              {
+                "name": "value",
+                "type": "Double"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "SliderLabel(value: $value).padding()"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "value",
+                "type": "Double",
+                "initial": "0.5"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 2,
+    "viewNames": [
+      "SliderLabel",
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct SliderLabel: View {\n    @Binding var value: Double\n    var body: some View {\n        VStack {\n            Slider(value: $value, in: 0...1)\n            Text(String(format: \"%.2f\", value))\n        }\n    }\n}\nstruct ContentView: View {\n    @State private var value: Double = 0.5\n    var body: some View { SliderLabel(value: $value).padding() }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "SliderLabel",
+          "propsInterface": "interface SliderLabelProps {\n  value: number;\n  onValueChange?: (value: number) => void;\n}",
+          "stateHooks": [],
+          "bindingProps": [
+            "value, onValueChange"
+          ],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }>\n\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [value, setValue] = useState<number>(0.5);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    {/* Custom: SliderLabel(value: $value).padding() */}\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "SliderLabel(value: $value).padding()"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 2,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "SliderLabel(value: $value).padding()"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1440,
+    "rawResponseLength": 2711,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 435
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 131
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 209
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 136
+      },
+      {
+        "path": "src/views/SliderLabel.tsx",
+        "contentLength": 483
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 311
+      }
+    ],
+    "filesCount": 8
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

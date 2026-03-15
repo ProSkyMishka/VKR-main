@@ -1,0 +1,13 @@
+import SwiftUI
+struct ContentView: View {
+    @State private var count = 0
+    var body: some View {
+        VStack {
+            Text("\(count)")
+            HStack {
+                Button("-") { count -= 1 }
+                Button("+") { count += 1 }
+            }
+        }
+    }
+}

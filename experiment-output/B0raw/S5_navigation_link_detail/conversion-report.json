@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S5_navigation/link_detail.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S5_navigation_link_detail",
+    "startedAt": "2026-03-14T21:09:21.178Z",
+    "finishedAt": "2026-03-14T21:09:30.896Z",
+    "success": false,
+    "errors": [
+      "> swiftui-to-vite-react@0.0.0 build\n> tsc && vite build\n\nsrc/App.tsx(5,11): error TS2741: Property 'title' is missing in type '{}' but required in type 'DetailViewProps'."
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0raw",
+    "totalPromptTokens": 417,
+    "totalCompletionTokens": 798,
+    "totalTokens": 1215
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "DetailView",
+          "params": [],
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          },
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "(skipped)"
+            },
+            "children": [],
+            "modifiers": []
+          }
+        }
+      ],
+      "entryViewName": "DetailView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "DetailView"
+    ],
+    "entryViewName": "DetailView",
+    "swiftSourcePreview": "import SwiftUI\nstruct DetailView: View {\n    let title: String\n    var body: some View { Text(\"Detail: \\(title)\") }\n}\nstruct ContentView: View {\n    var body: some View {\n        NavigationView {\n            NavigationLink(\"Open\") { DetailView(title: \"Open\") }\n                .navigationTitle(\"Root\")\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "entryViewName": "DetailView",
+      "skeleton": [
+        {
+          "viewName": "DetailView",
+          "propsInterface": "",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "",
+          "imports": []
+        }
+      ],
+      "unresolved": []
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1381,
+    "rawResponseLength": 2146,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 441
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 322
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 159
+      },
+      {
+        "path": "src/views/DetailView.tsx",
+        "contentLength": 201
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false,
+    "buildError": "> swiftui-to-vite-react@0.0.0 build\n> tsc && vite build\n\nsrc/App.tsx(5,11): error TS2741: Property 'title' is missing in type '{}' but required in type 'DetailViewProps'."
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

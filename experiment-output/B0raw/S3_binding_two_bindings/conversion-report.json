@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S3_binding/two_bindings.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S3_binding_two_bindings",
+    "startedAt": "2026-03-14T21:03:10.584Z",
+    "finishedAt": "2026-03-14T21:03:25.811Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0raw",
+    "totalPromptTokens": 448,
+    "totalCompletionTokens": 1004,
+    "totalTokens": 1452
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "FormView",
+          "params": [],
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          },
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "(skipped)"
+            },
+            "children": [],
+            "modifiers": []
+          }
+        }
+      ],
+      "entryViewName": "FormView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "FormView"
+    ],
+    "entryViewName": "FormView",
+    "swiftSourcePreview": "import SwiftUI\nstruct FormView: View {\n    @Binding var a: String\n    @Binding var b: String\n    var body: some View {\n        VStack {\n            TextField(\"A\", text: $a)\n            TextField(\"B\", text: $b)\n        }.padding()\n    }\n}\nstruct ContentView: View {\n    @State private var a = \"\"\n    @State private var b = \"\"\n    var body: some View { FormView(a: $a, b: $b) }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "entryViewName": "FormView",
+      "skeleton": [
+        {
+          "viewName": "FormView",
+          "propsInterface": "",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "",
+          "imports": []
+        }
+      ],
+      "unresolved": []
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1435,
+    "rawResponseLength": 2720,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 435
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 131
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 140
+      },
+      {
+        "path": "src/views/FormView.tsx",
+        "contentLength": 823
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

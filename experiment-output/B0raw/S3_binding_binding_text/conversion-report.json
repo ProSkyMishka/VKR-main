@@ -1,0 +1,118 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S3_binding/binding_text.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S3_binding_binding_text",
+    "startedAt": "2026-03-14T21:00:13.886Z",
+    "finishedAt": "2026-03-14T21:00:25.873Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0raw",
+    "totalPromptTokens": 431,
+    "totalCompletionTokens": 945,
+    "totalTokens": 1376
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "EditView",
+          "params": [],
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          },
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "(skipped)"
+            },
+            "children": [],
+            "modifiers": []
+          }
+        }
+      ],
+      "entryViewName": "EditView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "EditView"
+    ],
+    "entryViewName": "EditView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct EditView: View {\n    @Binding var text: String\n\n    var body: some View {\n        TextField(\"Name\", text: $text)\n            .padding()\n    }\n}\n\nstruct ContentView: View {\n    @State private var name = \"\"\n\n    var body: some View {\n        VStack {\n            EditView(text: $name)\n            Text(\"Hello, \\(name)\")\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "entryViewName": "EditView",
+      "skeleton": [
+        {
+          "viewName": "EditView",
+          "propsInterface": "",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "",
+          "imports": []
+        }
+      ],
+      "unresolved": []
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1416,
+    "rawResponseLength": 2567,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 441
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 322
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 224
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 140
+      },
+      {
+        "path": "src/views/EditView.tsx",
+        "contentLength": 642
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

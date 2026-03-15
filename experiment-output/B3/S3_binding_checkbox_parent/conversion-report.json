@@ -1,0 +1,211 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S3_binding/checkbox_parent.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B3/S3_binding_checkbox_parent",
+    "startedAt": "2026-03-14T22:59:17.119Z",
+    "finishedAt": "2026-03-14T22:59:29.022Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B3",
+    "totalPromptTokens": 1563,
+    "totalCompletionTokens": 1082,
+    "totalTokens": 2645
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "CheckboxView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "Toggle(\"Item\", isOn: $isChecked)"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": [
+              {
+                "name": "isChecked",
+                "type": "Bool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "CheckboxView(isChecked: $isChecked).padding()"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "isChecked",
+                "type": "Bool",
+                "initial": "false"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 2,
+    "viewNames": [
+      "CheckboxView",
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct CheckboxView: View {\n    @Binding var isChecked: Bool\n    var body: some View {\n        Toggle(\"Item\", isOn: $isChecked)\n    }\n}\nstruct ContentView: View {\n    @State private var isChecked = false\n    var body: some View {\n        CheckboxView(isChecked: $isChecked).padding()\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "CheckboxView",
+          "propsInterface": "interface CheckboxViewProps {\n  isChecked: boolean;\n  onIsCheckedChange?: (value: boolean) => void;\n}",
+          "stateHooks": [],
+          "bindingProps": [
+            "isChecked, onIsCheckedChange"
+          ],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    {/* Custom: Toggle(\"Item\", isOn: $isChecked) */}\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [isChecked, setIsChecked] = useState<boolean>(false);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    {/* Custom: CheckboxView(isChecked: $isChecked).padding() */}\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "CheckboxView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "Toggle(\"Item\", isOn: $isChecked)"
+        },
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "CheckboxView(isChecked: $isChecked).padding()"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 2,
+    "unresolvedCount": 2,
+    "unresolvedList": [
+      {
+        "viewName": "CheckboxView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "Toggle(\"Item\", isOn: $isChecked)"
+      },
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "CheckboxView(isChecked: $isChecked).padding()"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 3,
+    "retrievedIds": [
+      "s3-binding-child",
+      "s3-binding-parent",
+      "binding"
+    ],
+    "retrievedTags": [
+      [
+        "@Binding",
+        "state",
+        "S3"
+      ],
+      [
+        "@Binding",
+        "state",
+        "S3"
+      ],
+      [
+        "@Binding",
+        "state"
+      ]
+    ],
+    "ragContextLength": 1102
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 5193,
+    "rawResponseLength": 2995,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 454
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 161
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 303
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 224
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 278
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 422
+      },
+      {
+        "path": "src/views/CheckboxView.tsx",
+        "contentLength": 448
+      }
+    ],
+    "filesCount": 8
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

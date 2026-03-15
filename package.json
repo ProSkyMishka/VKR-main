@@ -1,0 +1,28 @@
+{
+  "name": "swiftui-to-react-converter",
+  "version": "0.1.0",
+  "description": "Hybrid SwiftUI → React+TS converter (UI-IR, rules, RAG, LLM, validation, repair loop)",
+  "type": "module",
+  "main": "dist/cli.js",
+  "bin": {
+    "swiftui2react": "dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/cli.js",
+    "convert": "node dist/cli.js",
+    "test": "node --test dist/**/*.test.js",
+    "experiment": "node scripts/run-experiment.js"
+  },
+  "keywords": ["swiftui", "react", "converter", "vkr"],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "typescript": "^5.3.0"
+  }
+}

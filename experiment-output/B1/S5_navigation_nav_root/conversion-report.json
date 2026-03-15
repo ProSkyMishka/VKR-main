@@ -1,0 +1,146 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S5_navigation/nav_root.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B1/S5_navigation_nav_root",
+    "startedAt": "2026-03-14T22:11:30.225Z",
+    "finishedAt": "2026-03-14T22:11:39.567Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B1",
+    "totalPromptTokens": 786,
+    "totalCompletionTokens": 838,
+    "totalTokens": 1624
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "NavigationView",
+            "props": {},
+            "modifiers": [],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Root"
+                },
+                "modifiers": [
+                  {
+                    "name": "navigationTitle",
+                    "args": [
+                      "\"Home\""
+                    ]
+                  }
+                ],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct ContentView: View {\n    var body: some View {\n        NavigationView {\n            VStack {\n                Text(\"Root\")\n            }\n            .navigationTitle(\"Home\")\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div>\n      <span>Root</span>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body.children[0]",
+          "description": "Unresolved modifier: .navigationTitle"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body.children[0]",
+        "description": "Unresolved modifier: .navigationTitle"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 2816,
+    "rawResponseLength": 2253,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 436
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 161
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 224
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 120
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 341
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

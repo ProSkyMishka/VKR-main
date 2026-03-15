@@ -1,0 +1,131 @@
+{
+  "meta": {
+    "inputFile": "datasets/S1_layout/two_columns.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B1/S1_layout_two_columns",
+    "startedAt": "2026-03-14T18:22:48.567Z",
+    "finishedAt": "2026-03-14T18:22:48.924Z",
+    "success": false,
+    "errors": [
+      "LLM generation: OpenRouter API error 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 8192 tokens, but can only afford 7527. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3ACTuIpdW2g1KbGLjUNXYh4CxGO\"}"
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B1"
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "HStack",
+            "props": {
+              "spacing": 32
+            },
+            "modifiers": [
+              {
+                "name": "padding",
+                "args": [
+                  "20"
+                ]
+              }
+            ],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Col1-A"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Col1-B"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Col2-A"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Col2-B"
+                },
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    var body: some View {\n        HStack(spacing: 32) {\n            VStack { Text(\"Col1-A\"); Text(\"Col1-B\") }\n            VStack { Text(\"Col2-A\"); Text(\"Col2-B\") }\n        }.padding(20)\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'row', gap: 32, padding: 20 }>\n      <span>Col1-A</span>\n      <span>Col1-B</span>\n      <span>Col2-A</span>\n      <span>Col2-B</span>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 0
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 0,
+    "rawResponseLength": 0,
+    "filesGenerated": [],
+    "filesCount": 0
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

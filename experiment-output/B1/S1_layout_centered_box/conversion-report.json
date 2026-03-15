@@ -1,0 +1,158 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S1_layout/centered_box.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B1/S1_layout_centered_box",
+    "startedAt": "2026-03-14T21:48:42.427Z",
+    "finishedAt": "2026-03-14T21:48:52.746Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B1",
+    "totalPromptTokens": 896,
+    "totalCompletionTokens": 942,
+    "totalTokens": 1838
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {},
+            "modifiers": [],
+            "children": [
+              {
+                "type": "Spacer",
+                "props": {},
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Center"
+                },
+                "modifiers": [
+                  {
+                    "name": "padding",
+                    "args": [
+                      "24"
+                    ]
+                  },
+                  {
+                    "name": "background",
+                    "args": [
+                      "Color.orange.opacity(0.3"
+                    ]
+                  },
+                  {
+                    "name": "cornerRadius",
+                    "args": [
+                      "8"
+                    ]
+                  }
+                ],
+                "children": []
+              },
+              {
+                "type": "Spacer",
+                "props": {},
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    var body: some View {\n        VStack {\n            Spacer()\n            Text(\"Center\").padding(24).background(Color.orange.opacity(0.3)).cornerRadius(8)\n            Spacer()\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }>\n      <div style={{ flex: 1, minWidth: 0, minHeight: 0 }} />\n      <span style={ padding: 24, backgroundColor: 'var(--bg-orange.opacity(0.3, #eee)', borderRadius: 8 }>Center</span>\n      <div style={{ flex: 1, minWidth: 0, minHeight: 0 }} />\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 3058,
+    "rawResponseLength": 2526,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 432
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 131
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 303
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 120
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 648
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

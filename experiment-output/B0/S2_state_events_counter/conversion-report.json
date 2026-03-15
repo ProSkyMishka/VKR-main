@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S2_state_events/counter.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S2_state_events_counter",
+    "startedAt": "2026-03-14T21:24:29.414Z",
+    "finishedAt": "2026-03-14T21:24:40.779Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0",
+    "totalPromptTokens": 407,
+    "totalCompletionTokens": 913,
+    "totalTokens": 1320
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {
+              "spacing": 20
+            },
+            "modifiers": [],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Count: \\(count)"
+                },
+                "modifiers": [
+                  {
+                    "name": "font",
+                    "args": [
+                      ".title"
+                    ]
+                  }
+                ],
+                "children": []
+              },
+              {
+                "type": "Button",
+                "props": {
+                  "label": "Increment"
+                },
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "count",
+                "type": "Int",
+                "initial": "0"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct ContentView: View {\n    @State private var count = 0\n\n    var body: some View {\n        VStack(spacing: 20) {\n            Text(\"Count: \\(count)\")\n                .font(.title)\n            Button(\"Increment\") {\n                count += 1\n            }\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [count, setCount] = useState<number>(0);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center' }>\n      <span>Count: \\(count)</span>\n      <button type=\"button\" onClick={() => {}} style={{ border: 'none', background: 'none', color: '#007AFF', cursor: 'pointer', padding: 0, fontSize: 'inherit' }}>\n\n      </button>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1355,
+    "rawResponseLength": 2478,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 441
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 322
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 136
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 555
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

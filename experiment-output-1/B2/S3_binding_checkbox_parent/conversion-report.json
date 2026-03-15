@@ -1,0 +1,159 @@
+{
+  "meta": {
+    "inputFile": "datasets/S3_binding/checkbox_parent.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B2/S3_binding_checkbox_parent",
+    "startedAt": "2026-03-14T18:23:48.313Z",
+    "finishedAt": "2026-03-14T18:23:48.654Z",
+    "success": false,
+    "errors": [
+      "LLM generation: OpenRouter API error 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 8192 tokens, but can only afford 7527. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3ACTuIpdW2g1KbGLjUNXYh4CxGO\"}"
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B2"
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "CheckboxView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "Toggle(\"Item\", isOn: $isChecked)"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": [
+              {
+                "name": "isChecked",
+                "type": "Bool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "CheckboxView(isChecked: $isChecked).padding()"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "isChecked",
+                "type": "Bool",
+                "initial": "false"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 2,
+    "viewNames": [
+      "CheckboxView",
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct CheckboxView: View {\n    @Binding var isChecked: Bool\n    var body: some View {\n        Toggle(\"Item\", isOn: $isChecked)\n    }\n}\nstruct ContentView: View {\n    @State private var isChecked = false\n    var body: some View {\n        CheckboxView(isChecked: $isChecked).padding()\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "CheckboxView",
+          "propsInterface": "interface CheckboxViewProps {\n  isChecked: boolean;\n  onIsCheckedChange?: (value: boolean) => void;\n}",
+          "stateHooks": [],
+          "bindingProps": [
+            "isChecked, onIsCheckedChange"
+          ],
+          "jsxSkeleton": "    {/* Custom: Toggle(\"Item\", isOn: $isChecked) */}",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [isChecked, setIsChecked] = useState<boolean>(false);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "    {/* Custom: CheckboxView(isChecked: $isChecked).padding() */}",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "CheckboxView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "Toggle(\"Item\", isOn: $isChecked)"
+        },
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "CheckboxView(isChecked: $isChecked).padding()"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 2,
+    "unresolvedCount": 2,
+    "unresolvedList": [
+      {
+        "viewName": "CheckboxView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "Toggle(\"Item\", isOn: $isChecked)"
+      },
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "CheckboxView(isChecked: $isChecked).padding()"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 0
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 0,
+    "rawResponseLength": 0,
+    "filesGenerated": [],
+    "filesCount": 0
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

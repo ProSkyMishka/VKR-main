@@ -1,0 +1,148 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S2_state_events/on_appear_set.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S2_state_events_on_appear_set",
+    "startedAt": "2026-03-14T21:26:33.837Z",
+    "finishedAt": "2026-03-14T21:26:43.470Z",
+    "success": false,
+    "errors": [
+      "> swiftui-to-react@0.0.0 build\n> tsc && vite build\n\nsrc/views/ContentView.tsx(12,3): error TS2304: Cannot find name 'useEffect'."
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0",
+    "totalPromptTokens": 379,
+    "totalCompletionTokens": 805,
+    "totalTokens": 1184
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Text",
+            "props": {
+              "content": "\\(value)"
+            },
+            "modifiers": [
+              {
+                "name": "onAppear"
+              }
+            ],
+            "children": []
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "value",
+                "type": "Int",
+                "initial": "0"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    @State private var value = 0\n    var body: some View {\n        Text(\"\\(value)\")\n            .onAppear { value = 42 }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [value, setValue] = useState<number>(0);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <span>\\(value)</span>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Unresolved modifier: .onAppear"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Unresolved modifier: .onAppear"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1234,
+    "rawResponseLength": 2149,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 435
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 131
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 136
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 253
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false,
+    "buildError": "> swiftui-to-react@0.0.0 build\n> tsc && vite build\n\nsrc/views/ContentView.tsx(12,3): error TS2304: Cannot find name 'useEffect'."
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

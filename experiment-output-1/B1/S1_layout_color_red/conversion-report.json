@@ -1,0 +1,129 @@
+{
+  "meta": {
+    "inputFile": "datasets/S1_layout/color_red.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B1/S1_layout_color_red",
+    "startedAt": "2026-03-14T18:22:43.583Z",
+    "finishedAt": "2026-03-14T18:22:43.742Z",
+    "success": false,
+    "errors": [
+      "LLM generation: OpenRouter API error 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 8192 tokens, but can only afford 7527. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3ACTuIpdW2g1KbGLjUNXYh4CxGO\"}"
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B1"
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "ZStack",
+            "props": {},
+            "modifiers": [],
+            "children": [
+              {
+                "type": "Color",
+                "props": {
+                  "name": "red"
+                },
+                "modifiers": [
+                  {
+                    "name": "ignoresSafeArea"
+                  }
+                ],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Red"
+                },
+                "modifiers": [
+                  {
+                    "name": "foregroundColor",
+                    "args": [
+                      ".white"
+                    ]
+                  }
+                ],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    var body: some View {\n        ZStack {\n            Color.red.ignoresSafeArea()\n            Text(\"Red\").foregroundColor(.white)\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={{ position: 'relative', minHeight: '100vh', width: '100%', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n      <div style={{ position: 'absolute', inset: 0, backgroundColor: '#FF0000', zIndex: 0 }} />\n      <div style={{ position: 'relative', zIndex: 1 }}>\n      <span style={ color: '#FFFFFF' }>Red</span>\n      </div>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body.children[0]",
+          "description": "Unresolved modifier: .ignoresSafeArea"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body.children[0]",
+        "description": "Unresolved modifier: .ignoresSafeArea"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 0
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 0,
+    "rawResponseLength": 0,
+    "filesGenerated": [],
+    "filesCount": 0
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

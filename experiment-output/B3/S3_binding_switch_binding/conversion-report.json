@@ -1,0 +1,208 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S3_binding/switch_binding.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B3/S3_binding_switch_binding",
+    "startedAt": "2026-03-14T23:01:32.143Z",
+    "finishedAt": "2026-03-14T23:01:52.268Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B3",
+    "totalPromptTokens": 1668,
+    "totalCompletionTokens": 1128,
+    "totalTokens": 2796
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "SwitchView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "Toggle(\"Switch\", isOn: $on)"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": [
+              {
+                "name": "on",
+                "type": "Bool"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {},
+            "modifiers": [
+              {
+                "name": "padding"
+              }
+            ],
+            "children": []
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "on",
+                "type": "Bool",
+                "initial": "false"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 2,
+    "viewNames": [
+      "SwitchView",
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct SwitchView: View {\n    @Binding var on: Bool\n    var body: some View {\n        Toggle(\"Switch\", isOn: $on)\n    }\n}\nstruct ContentView: View {\n    @State private var on = false\n    var body: some View {\n        VStack {\n            SwitchView(on: $on)\n            Text(on ? \"On\" : \"Off\")\n        }.padding()\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "SwitchView",
+          "propsInterface": "interface SwitchViewProps {\n  on: boolean;\n  onOnChange?: (value: boolean) => void;\n}",
+          "stateHooks": [],
+          "bindingProps": [
+            "on, onOnChange"
+          ],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    {/* Custom: Toggle(\"Switch\", isOn: $on) */}\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [on, setOn] = useState<boolean>(false);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center', padding: 16 }>\n\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "SwitchView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "Toggle(\"Switch\", isOn: $on)"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 2,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "SwitchView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "Toggle(\"Switch\", isOn: $on)"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 3,
+    "retrievedIds": [
+      "s1-padding",
+      "s1-centered-box",
+      "s1-vstack-text"
+    ],
+    "retrievedTags": [
+      [
+        "layout",
+        "padding",
+        "VStack",
+        "S1"
+      ],
+      [
+        "layout",
+        "VStack",
+        "Spacer",
+        "Text",
+        "padding",
+        "background",
+        "S1"
+      ],
+      [
+        "layout",
+        "VStack",
+        "Text",
+        "S1"
+      ]
+    ],
+    "ragContextLength": 1292
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 5328,
+    "rawResponseLength": 3092,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 432
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 131
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 303
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 120
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 602
+      },
+      {
+        "path": "src/views/SwitchView.tsx",
+        "contentLength": 578
+      }
+    ],
+    "filesCount": 8
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

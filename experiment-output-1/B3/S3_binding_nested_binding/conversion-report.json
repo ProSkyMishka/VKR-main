@@ -1,0 +1,186 @@
+{
+  "meta": {
+    "inputFile": "datasets/S3_binding/nested_binding.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B3/S3_binding_nested_binding",
+    "startedAt": "2026-03-14T18:24:37.661Z",
+    "finishedAt": "2026-03-14T18:24:37.953Z",
+    "success": false,
+    "errors": [
+      "LLM generation: OpenRouter API error 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 8192 tokens, but can only afford 7527. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3ACTuIpdW2g1KbGLjUNXYh4CxGO\"}"
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B3"
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "InnerView",
+          "params": [],
+          "body": {
+            "type": "Button",
+            "props": {},
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": [
+              {
+                "name": "x",
+                "type": "Int"
+              }
+            ]
+          }
+        },
+        {
+          "name": "MiddleView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "InnerView(x: $x)"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": [
+              {
+                "name": "x",
+                "type": "Int"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {},
+            "modifiers": [],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "\\(x)"
+                },
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "x",
+                "type": "Int",
+                "initial": "0"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 3,
+    "viewNames": [
+      "InnerView",
+      "MiddleView",
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct InnerView: View {\n    @Binding var x: Int\n    var body: some View { Button(\"Inner\") { x += 1 } }\n}\nstruct MiddleView: View {\n    @Binding var x: Int\n    var body: some View { InnerView(x: $x) }\n}\nstruct ContentView: View {\n    @State private var x = 0\n    var body: some View {\n        VStack {\n            Text(\"\\(x)\")\n            MiddleView(x: $x)\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "InnerView",
+          "propsInterface": "interface InnerViewProps {\n  x: number;\n  onXChange?: (value: number) => void;\n}",
+          "stateHooks": [],
+          "bindingProps": [
+            "x, onXChange"
+          ],
+          "jsxSkeleton": "    <button type=\"button\" onClick={() => {}} style={{ border: 'none', background: 'none', color: '#007AFF', cursor: 'pointer', padding: 0, fontSize: 'inherit' }}>\n\n    </button>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "MiddleView",
+          "propsInterface": "interface MiddleViewProps {\n  x: number;\n  onXChange?: (value: number) => void;\n}",
+          "stateHooks": [],
+          "bindingProps": [
+            "x, onXChange"
+          ],
+          "jsxSkeleton": "    {/* Custom: InnerView(x: $x) */}",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [x, setX] = useState<number>(0);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 8 }>\n      <span>\\(x)</span>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "MiddleView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "InnerView(x: $x)"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 3,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "MiddleView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "InnerView(x: $x)"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 0
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 0,
+    "rawResponseLength": 0,
+    "filesGenerated": [],
+    "filesCount": 0
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

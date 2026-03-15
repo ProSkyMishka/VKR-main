@@ -1,0 +1,162 @@
+{
+  "meta": {
+    "inputFile": "datasets/S6_animations/conditional_anim.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S6_animations_conditional_anim",
+    "startedAt": "2026-03-14T18:22:35.050Z",
+    "finishedAt": "2026-03-14T18:22:35.185Z",
+    "success": false,
+    "errors": [
+      "LLM generation: OpenRouter API error 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 8192 tokens, but can only afford 7527. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3ACTuIpdW2g1KbGLjUNXYh4CxGO\"}"
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0"
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {},
+            "modifiers": [],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Visible"
+                },
+                "modifiers": [
+                  {
+                    "name": "transition",
+                    "args": [
+                      ".opacity"
+                    ]
+                  },
+                  {
+                    "name": "easeInOut",
+                    "args": [
+                      "duration: 0.3"
+                    ]
+                  },
+                  {
+                    "name": "toggle"
+                  }
+                ],
+                "children": []
+              },
+              {
+                "type": "Button",
+                "props": {
+                  "label": "Toggle"
+                },
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "show",
+                "type": "Bool",
+                "initial": "true"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    @State private var show = true\n    var body: some View {\n        VStack {\n            if show {\n                Text(\"Visible\").transition(.opacity)\n            }\n            Button(\"Toggle\") {\n                withAnimation(.easeInOut(duration: 0.3)) { show.toggle() }\n            }\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [show, setShow] = useState<boolean>(true);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 8 }>\n      <span>Visible</span>\n      <button type=\"button\" onClick={() => {}} style={{ border: 'none', background: 'none', color: '#007AFF', cursor: 'pointer', padding: 0, fontSize: 'inherit' }}>\n\n      </button>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body.children[0]",
+          "description": "Unresolved modifier: .transition"
+        },
+        {
+          "viewName": "ContentView",
+          "location": "body.children[0]",
+          "description": "Unresolved modifier: .easeInOut"
+        },
+        {
+          "viewName": "ContentView",
+          "location": "body.children[0]",
+          "description": "Unresolved modifier: .toggle"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 3,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body.children[0]",
+        "description": "Unresolved modifier: .transition"
+      },
+      {
+        "viewName": "ContentView",
+        "location": "body.children[0]",
+        "description": "Unresolved modifier: .easeInOut"
+      },
+      {
+        "viewName": "ContentView",
+        "location": "body.children[0]",
+        "description": "Unresolved modifier: .toggle"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 0
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 0,
+    "rawResponseLength": 0,
+    "filesGenerated": [],
+    "filesCount": 0
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

@@ -1,0 +1,16 @@
+import React from 'react';
+
+const ContentView: React.FC = () => {
+  return (
+    <div style={{
+      padding: '16px',
+      backgroundColor: 'rgba(128, 128, 128, 0.15)',
+      borderRadius: '12px'
+    }}>
+      <h1 style={{ fontSize: '1.5em', margin: '0 0 8px' }}>Card Title</h1>
+      <p>Card body text here.</p>
+    </div>
+  );
+};
+
+export default ContentView;

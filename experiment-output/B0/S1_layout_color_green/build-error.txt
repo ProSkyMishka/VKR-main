@@ -1,0 +1,4 @@
+> swiftui-to-vite-react@0.0.0 build
+> tsc && vite build
+
+src/views/ContentView.tsx(2,35): error TS2307: Cannot find module 'react-native' or its corresponding type declarations.

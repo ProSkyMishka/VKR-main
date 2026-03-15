@@ -1,0 +1,181 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S2_state_events/step_up_down.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B2/S2_state_events_step_up_down",
+    "startedAt": "2026-03-14T22:27:09.543Z",
+    "finishedAt": "2026-03-14T22:27:20.943Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B2",
+    "totalPromptTokens": 1462,
+    "totalCompletionTokens": 1025,
+    "totalTokens": 2487
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "HStack",
+            "props": {},
+            "modifiers": [
+              {
+                "name": "padding"
+              }
+            ],
+            "children": [
+              {
+                "type": "Button",
+                "props": {
+                  "label": "−"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "\\(step)"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Button",
+                "props": {
+                  "label": "+"
+                },
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "step",
+                "type": "Int",
+                "initial": "0"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    @State private var step = 0\n    var body: some View {\n        HStack {\n            Button(\"−\") { step -= 1 }\n            Text(\"\\(step)\")\n            Button(\"+\") { step += 1 }\n        }.padding()\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [step, setStep] = useState<number>(0);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'row', gap: 8, alignItems: 'center', padding: 16 }>\n      <button type=\"button\" onClick={() => {}} style={{ border: 'none', background: 'none', color: '#007AFF', cursor: 'pointer', padding: 0, fontSize: 'inherit' }}>\n\n      </button>\n      <span>\\(step)</span>\n      <button type=\"button\" onClick={() => {}} style={{ border: 'none', background: 'none', color: '#007AFF', cursor: 'pointer', padding: 0, fontSize: 'inherit' }}>\n\n      </button>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 3,
+    "retrievedIds": [
+      "s1-hstack",
+      "s1-centered-box",
+      "s1-vstack-text"
+    ],
+    "retrievedTags": [
+      [
+        "layout",
+        "HStack",
+        "Text",
+        "S1"
+      ],
+      [
+        "layout",
+        "VStack",
+        "Spacer",
+        "Text",
+        "padding",
+        "background",
+        "S1"
+      ],
+      [
+        "layout",
+        "VStack",
+        "Text",
+        "S1"
+      ]
+    ],
+    "ragContextLength": 1334
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 4584,
+    "rawResponseLength": 2824,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 433
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 161
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 303
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 224
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 120
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 914
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

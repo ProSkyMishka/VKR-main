@@ -1,0 +1,180 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S6_animations/spring_anim.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B2/S6_animations_spring_anim",
+    "startedAt": "2026-03-14T22:45:28.725Z",
+    "finishedAt": "2026-03-14T22:45:39.725Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B2",
+    "totalPromptTokens": 1257,
+    "totalCompletionTokens": 934,
+    "totalTokens": 2191
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Text",
+            "props": {
+              "content": "Spring"
+            },
+            "modifiers": [
+              {
+                "name": "scaleEffect",
+                "args": [
+                  "scale"
+                ]
+              },
+              {
+                "name": "animation",
+                "args": [
+                  ".spring("
+                ]
+              },
+              {
+                "name": "3"
+              }
+            ],
+            "children": []
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "scale",
+                "type": "CGFloat",
+                "initial": "1"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    @State private var scale: CGFloat = 1\n    var body: some View {\n        Text(\"Spring\")\n            .scaleEffect(scale)\n            .animation(.spring(), value: scale)\n        Button(\"Bounce\") { scale = scale == 1 ? 1.3 : 1 }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [scale, setScale] = useState<unknown>(1);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <span>Spring</span>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Unresolved modifier: .3"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Unresolved modifier: .3"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 3,
+    "retrievedIds": [
+      "s1-vstack-text",
+      "s1-hstack",
+      "s1-zstack-color"
+    ],
+    "retrievedTags": [
+      [
+        "layout",
+        "VStack",
+        "Text",
+        "S1"
+      ],
+      [
+        "layout",
+        "HStack",
+        "Text",
+        "S1"
+      ],
+      [
+        "layout",
+        "ZStack",
+        "Color",
+        "Text",
+        "S1"
+      ]
+    ],
+    "ragContextLength": 1110
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 3982,
+    "rawResponseLength": 2532,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 455
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 146
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 605
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

@@ -1,0 +1,122 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S1_layout/vstack_gap_8.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0raw/S1_layout_vstack_gap_8",
+    "startedAt": "2026-03-14T20:52:54.578Z",
+    "finishedAt": "2026-03-14T20:53:09.337Z",
+    "success": false,
+    "errors": [
+      "> swiftui-to-react@0.0.0 build\n> tsc && vite build\n\nsrc/views/ContentView.tsx(6,21): error TS2322: Type '{ spacing: string; }' is not assignable to type 'Properties<string | number, string & {}>'.\n  Object literal may only specify known properties, and 'spacing' does not exist in type 'Properties<string | number, string & {}>'."
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0raw",
+    "totalPromptTokens": 385,
+    "totalCompletionTokens": 825,
+    "totalTokens": 1210
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          },
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "(skipped)"
+            },
+            "children": [],
+            "modifiers": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    var body: some View {\n        VStack(spacing: 8) {\n            Text(\"A\")\n            Text(\"B\")\n            Text(\"C\")\n        }.padding(12)\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "entryViewName": "ContentView",
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "",
+          "imports": []
+        }
+      ],
+      "unresolved": []
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1256,
+    "rawResponseLength": 2176,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 435
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 209
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 169
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 260
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false,
+    "buildError": "> swiftui-to-react@0.0.0 build\n> tsc && vite build\n\nsrc/views/ContentView.tsx(6,21): error TS2322: Type '{ spacing: string; }' is not assignable to type 'Properties<string | number, string & {}>'.\n  Object literal may only specify known properties, and 'spacing' does not exist in type 'Properties<string | number, string & {}>'."
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

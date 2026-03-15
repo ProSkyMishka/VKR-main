@@ -1,0 +1,15 @@
+import React from 'react';
+
+const ContentView: React.FC = () => {
+  return (
+    <div style={{ padding: '16px' }}>
+      <div style={{ marginBottom: '24px', fontSize: '24px', fontWeight: 'bold' }}>Title</div>
+      <div style={{ marginBottom: '24px', fontSize: '18px', color: 'gray' }}>Subtitle</div>
+      <div style={{ width: '200px', height: '80px', backgroundColor: 'rgba(255, 165, 0, 0.3)', borderRadius: '8px' }}>
+        Box
+      </div>
+    </div>
+  );
+};
+
+export default ContentView;

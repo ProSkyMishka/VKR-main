@@ -1,0 +1,162 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S6_animations/combined_anim.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S6_animations_combined_anim",
+    "startedAt": "2026-03-14T21:44:54.129Z",
+    "finishedAt": "2026-03-14T21:45:04.495Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0",
+    "totalPromptTokens": 425,
+    "totalCompletionTokens": 896,
+    "totalTokens": 1321
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Text",
+            "props": {
+              "content": "Combo"
+            },
+            "modifiers": [
+              {
+                "name": "opacity",
+                "args": [
+                  "on ? 1 : 0.5"
+                ]
+              },
+              {
+                "name": "scaleEffect",
+                "args": [
+                  "on ? 1.2 : 1"
+                ]
+              },
+              {
+                "name": "animation",
+                "args": [
+                  ".easeInOut, value: on"
+                ]
+              },
+              {
+                "name": "toggle"
+              }
+            ],
+            "children": []
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "on",
+                "type": "Bool",
+                "initial": "false"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    @State private var on = false\n    var body: some View {\n        Text(\"Combo\")\n            .opacity(on ? 1 : 0.5)\n            .scaleEffect(on ? 1.2 : 1)\n            .animation(.easeInOut, value: on)\n        Button(\"Toggle\") { on.toggle() }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [on, setOn] = useState<boolean>(false);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <span>Combo</span>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Unresolved modifier: .toggle"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Unresolved modifier: .toggle"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1356,
+    "rawResponseLength": 2397,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 441
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 322
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 136
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 474
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

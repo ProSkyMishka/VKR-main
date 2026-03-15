@@ -1,0 +1,154 @@
+{
+  "meta": {
+    "inputFile": "datasets/S3_binding/parent_child_text.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B2/S3_binding_parent_child_text",
+    "startedAt": "2026-03-14T18:23:51.480Z",
+    "finishedAt": "2026-03-14T18:23:51.687Z",
+    "success": false,
+    "errors": [
+      "LLM generation: OpenRouter API error 402: {\"error\":{\"message\":\"This request requires more credits, or fewer max_tokens. You requested up to 8192 tokens, but can only afford 7527. To increase, visit https://openrouter.ai/settings/credits and upgrade to a paid account\",\"code\":402,\"metadata\":{\"provider_name\":null}},\"user_id\":\"user_3ACTuIpdW2g1KbGLjUNXYh4CxGO\"}"
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B2"
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "InputView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "TextField(\"Enter\", text: $value).padding()"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": [
+              {
+                "name": "value",
+                "type": "String"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {},
+            "modifiers": [],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "You wrote: \\(value)"
+                },
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "value",
+                "type": "String",
+                "initial": "\"\""
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 2,
+    "viewNames": [
+      "InputView",
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct InputView: View {\n    @Binding var value: String\n    var body: some View {\n        TextField(\"Enter\", text: $value).padding()\n    }\n}\nstruct ContentView: View {\n    @State private var value = \"\"\n    var body: some View {\n        VStack {\n            InputView(value: $value)\n            Text(\"You wrote: \\(value)\")\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "InputView",
+          "propsInterface": "interface InputViewProps {\n  value: string;\n  onValueChange?: (value: string) => void;\n}",
+          "stateHooks": [],
+          "bindingProps": [
+            "value, onValueChange"
+          ],
+          "jsxSkeleton": "    {/* Custom: TextField(\"Enter\", text: $value).padding() */}",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [value, setValue] = useState<string>(\"\");"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 8 }>\n      <span>You wrote: \\(value)</span>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "InputView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "TextField(\"Enter\", text: $value).padding()"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 2,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "InputView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "TextField(\"Enter\", text: $value).padding()"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 0
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 0,
+    "rawResponseLength": 0,
+    "filesGenerated": [],
+    "filesCount": 0
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

@@ -1,0 +1,157 @@
+{
+  "meta": {
+    "inputFile": "datasets/S1_layout/two_columns.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S1_layout_two_columns",
+    "startedAt": "2026-03-14T18:21:41.320Z",
+    "finishedAt": "2026-03-14T18:21:55.273Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0"
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "HStack",
+            "props": {
+              "spacing": 32
+            },
+            "modifiers": [
+              {
+                "name": "padding",
+                "args": [
+                  "20"
+                ]
+              }
+            ],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Col1-A"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Col1-B"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Col2-A"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Col2-B"
+                },
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    var body: some View {\n        HStack(spacing: 32) {\n            VStack { Text(\"Col1-A\"); Text(\"Col1-B\") }\n            VStack { Text(\"Col2-A\"); Text(\"Col2-B\") }\n        }.padding(20)\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'row', gap: 32, padding: 20 }>\n      <span>Col1-A</span>\n      <span>Col1-B</span>\n      <span>Col2-A</span>\n      <span>Col2-B</span>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1184,
+    "rawResponseLength": 1986,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 326
+      },
+      {
+        "path": "typescript",
+        "contentLength": 135
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 244
+      },
+      {
+        "path": "index.html",
+        "contentLength": 299
+      },
+      {
+        "path": "typescript",
+        "contentLength": 206
+      },
+      {
+        "path": "typescript",
+        "contentLength": 154
+      },
+      {
+        "path": "typescript",
+        "contentLength": 398
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

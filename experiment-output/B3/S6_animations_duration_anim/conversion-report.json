@@ -1,0 +1,193 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S6_animations/duration_anim.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B3/S6_animations_duration_anim",
+    "startedAt": "2026-03-14T23:14:06.373Z",
+    "finishedAt": "2026-03-14T23:14:18.590Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B3",
+    "totalPromptTokens": 1283,
+    "totalCompletionTokens": 900,
+    "totalTokens": 2183
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Text",
+            "props": {
+              "content": "Duration"
+            },
+            "modifiers": [
+              {
+                "name": "opacity",
+                "args": [
+                  "opacity"
+                ]
+              },
+              {
+                "name": "animation",
+                "args": [
+                  ".easeInOut(duration: 0.5"
+                ]
+              },
+              {
+                "name": "5"
+              },
+              {
+                "name": "5"
+              }
+            ],
+            "children": []
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "opacity",
+                "type": "Double",
+                "initial": "0.5"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    @State private var opacity: Double = 0.5\n    var body: some View {\n        Text(\"Duration\")\n            .opacity(opacity)\n            .animation(.easeInOut(duration: 0.5), value: opacity)\n        Button(\"Change\") { opacity = opacity == 0.5 ? 1 : 0.5 }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [opacity, setOpacity] = useState<number>(0.5);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <span>Duration</span>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Unresolved modifier: .5"
+        },
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Unresolved modifier: .5"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 2,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Unresolved modifier: .5"
+      },
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Unresolved modifier: .5"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 3,
+    "retrievedIds": [
+      "s1-vstack-text",
+      "s1-hstack",
+      "s1-zstack-color"
+    ],
+    "retrievedTags": [
+      [
+        "layout",
+        "VStack",
+        "Text",
+        "S1"
+      ],
+      [
+        "layout",
+        "HStack",
+        "Text",
+        "S1"
+      ],
+      [
+        "layout",
+        "ZStack",
+        "Color",
+        "Text",
+        "S1"
+      ]
+    ],
+    "ragContextLength": 1110
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 4055,
+    "rawResponseLength": 2443,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 432
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 131
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 303
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 110
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 575
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

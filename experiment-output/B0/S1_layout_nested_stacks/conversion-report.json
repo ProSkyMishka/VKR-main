@@ -1,0 +1,170 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S1_layout/nested_stacks.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S1_layout_nested_stacks",
+    "startedAt": "2026-03-14T21:20:22.399Z",
+    "finishedAt": "2026-03-14T21:20:32.866Z",
+    "success": false,
+    "errors": [
+      "> swiftui-to-vite-react@0.0.0 build\n> tsc && vite build\n\nsrc/views/ContentView.tsx(5,6): error TS2322: Type '{ children: Element[]; spacing: number; }' is not assignable to type 'IntrinsicAttributes & { spacing: number; }'.\n  Property 'children' does not exist on type 'IntrinsicAttributes & { spacing: number; }'.\nsrc/views/ContentView.tsx(6,8): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(7,10): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(8,10): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(10,8): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(11,10): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(12,10): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(18,50): error TS2339: Property 'children' does not exist on type '{ spacing: number; }'.\nsrc/views/ContentView.tsx(26,29): error TS2339: Property 'children' does not exist on type '{}'.\nsrc/views/ContentView.tsx(34,27): error TS2339: Property 'children' does not exist on type '{}'."
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0",
+    "totalPromptTokens": 423,
+    "totalCompletionTokens": 999,
+    "totalTokens": 1422
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {
+              "spacing": 20
+            },
+            "modifiers": [
+              {
+                "name": "padding",
+                "args": [
+                  ".horizontal, 40"
+                ]
+              },
+              {
+                "name": "padding",
+                "args": [
+                  ".vertical, 20"
+                ]
+              }
+            ],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "A"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "B"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "C"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "D"
+                },
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct ContentView: View {\n    var body: some View {\n        VStack(spacing: 20) {\n            HStack {\n                Text(\"A\")\n                Text(\"B\")\n            }\n            HStack {\n                Text(\"C\")\n                Text(\"D\")\n            }\n        }\n        .padding(.horizontal, 40)\n        .padding(.vertical, 20)\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 20, alignItems: 'center', padding: 16 }>\n      <span>A</span>\n      <span>B</span>\n      <span>C</span>\n      <span>D</span>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1420,
+    "rawResponseLength": 2693,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 441
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 132
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 322
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 136
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 770
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false,
+    "buildError": "> swiftui-to-vite-react@0.0.0 build\n> tsc && vite build\n\nsrc/views/ContentView.tsx(5,6): error TS2322: Type '{ children: Element[]; spacing: number; }' is not assignable to type 'IntrinsicAttributes & { spacing: number; }'.\n  Property 'children' does not exist on type 'IntrinsicAttributes & { spacing: number; }'.\nsrc/views/ContentView.tsx(6,8): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(7,10): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(8,10): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(10,8): error TS2559: Type '{ children: Element[]; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(11,10): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(12,10): error TS2559: Type '{ children: string; }' has no properties in common with type 'IntrinsicAttributes'.\nsrc/views/ContentView.tsx(18,50): error TS2339: Property 'children' does not exist on type '{ spacing: number; }'.\nsrc/views/ContentView.tsx(26,29): error TS2339: Property 'children' does not exist on type '{}'.\nsrc/views/ContentView.tsx(34,27): error TS2339: Property 'children' does not exist on type '{}'."
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

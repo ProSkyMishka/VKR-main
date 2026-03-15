@@ -1,0 +1,4 @@
+> swiftui-to-react@0.0.0 build
+> tsc && vite build
+
+src/App.tsx(5,11): error TS2739: Type '{}' is missing the following properties from type 'InputViewProps': value, onChange

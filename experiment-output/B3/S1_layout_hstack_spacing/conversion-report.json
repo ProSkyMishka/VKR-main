@@ -1,0 +1,178 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S1_layout/hstack_spacing.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B3/S1_layout_hstack_spacing",
+    "startedAt": "2026-03-14T22:48:40.733Z",
+    "finishedAt": "2026-03-14T22:48:51.382Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B3",
+    "totalPromptTokens": 1334,
+    "totalCompletionTokens": 880,
+    "totalTokens": 2214
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "HStack",
+            "props": {
+              "spacing": 16
+            },
+            "modifiers": [
+              {
+                "name": "padding",
+                "args": [
+                  "20"
+                ]
+              }
+            ],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Left"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Center"
+                },
+                "modifiers": [],
+                "children": []
+              },
+              {
+                "type": "Text",
+                "props": {
+                  "content": "Right"
+                },
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\n\nstruct ContentView: View {\n    var body: some View {\n        HStack(spacing: 16) {\n            Text(\"Left\")\n            Text(\"Center\")\n            Text(\"Right\")\n        }\n        .padding(20)\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'row', gap: 16, alignItems: 'center', padding: 20 }>\n      <span>Left</span>\n      <span>Center</span>\n      <span>Right</span>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 3,
+    "retrievedIds": [
+      "s1-hstack",
+      "s1-centered-box",
+      "s1-vstack-text"
+    ],
+    "retrievedTags": [
+      [
+        "layout",
+        "HStack",
+        "Text",
+        "S1"
+      ],
+      [
+        "layout",
+        "VStack",
+        "Spacer",
+        "Text",
+        "padding",
+        "background",
+        "S1"
+      ],
+      [
+        "layout",
+        "VStack",
+        "Text",
+        "S1"
+      ]
+    ],
+    "ragContextLength": 1334
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 4192,
+    "rawResponseLength": 2368,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 432
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 131
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 303
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 120
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 490
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

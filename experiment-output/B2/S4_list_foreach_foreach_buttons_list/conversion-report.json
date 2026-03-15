@@ -1,0 +1,152 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S4_list_foreach/foreach_buttons_list.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B2/S4_list_foreach_foreach_buttons_list",
+    "startedAt": "2026-03-14T22:33:35.270Z",
+    "finishedAt": "2026-03-14T22:33:45.750Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B2",
+    "totalPromptTokens": 1236,
+    "totalCompletionTokens": 904,
+    "totalTokens": 2140
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "List",
+            "props": {
+              "dataBinding": "labels, id: \\.self"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "selected",
+                "type": "String",
+                "initial": "\"\""
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    let labels = [\"First\", \"Second\", \"Third\"]\n    @State private var selected = \"\"\n    var body: some View {\n        List(labels, id: \\.self) { label in\n            Button(label) { selected = label }\n        }\n        Text(\"Selected: \\(selected)\")\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [selected, setSelected] = useState<string>(\"\");"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <ul>\n\n    </ul>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 0,
+    "unresolvedList": []
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 3,
+    "retrievedIds": [
+      "s1-vstack-text",
+      "s1-hstack",
+      "s1-zstack-color"
+    ],
+    "retrievedTags": [
+      [
+        "layout",
+        "VStack",
+        "Text",
+        "S1"
+      ],
+      [
+        "layout",
+        "HStack",
+        "Text",
+        "S1"
+      ],
+      [
+        "layout",
+        "ZStack",
+        "Color",
+        "Text",
+        "S1"
+      ]
+    ],
+    "ragContextLength": 1110
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 3935,
+    "rawResponseLength": 2484,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 433
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 161
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 303
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 224
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 120
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 574
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

@@ -1,0 +1,138 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S4_list_foreach/section_footer.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B1/S4_list_foreach_section_footer",
+    "startedAt": "2026-03-14T22:07:52.098Z",
+    "finishedAt": "2026-03-14T22:08:06.993Z",
+    "success": false,
+    "errors": [
+      "npm error code ERESOLVE\nnpm error ERESOLVE could not resolve\nnpm error\nnpm error While resolving: react-scripts@5.0.1\nnpm error Found: typescript@5.9.3\nnpm error node_modules/typescript\nnpm error   dev typescript@\"^5.3.0\" from the root project\nnpm error\nnpm error Could not resolve dependency:\nnpm error peerOptional typescript@\"^3.2.1 || ^4\" from react-scripts@5.0.1\nnpm error node_modules/react-scripts\nnpm error   react-scripts@\"5.0.1\" from the root project\nnpm error\nnpm error Conflicting peer dependency: typescript@4.9.5\nnpm error node_modules/typescript\nnpm error   peerOptional typescript@\"^3.2.1 || ^4\" from react-scripts@5.0.1\nnpm error   node_modules/react-scripts\nnpm error     react-scripts@\"5.0.1\" from the root project\nnpm error\nnpm error Fix the upstream dependency conflict, or retry\nnpm error this command with --force or --legacy-peer-deps\nnpm error to accept an incorrect (and potentially broken) dependency resolution.\nnpm error\nnpm error\nnpm error For a full report see:\nnpm error /Users/mprozorskiy/.npm/_logs/2026-03-14T22_08_01_326Z-eresolve-report.txt\nnpm error A complete log of this run can be found in: /Users/mprozorskiy/.npm/_logs/2026-03-14T22_08_01_326Z-debug-0.log\n"
+    ],
+    "totalLlmCalls": 1,
+    "experimentConfig": "B1",
+    "totalPromptTokens": 850,
+    "totalCompletionTokens": 1156,
+    "totalTokens": 2006
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "List {\n            Section(header: Text(\"Header\"), footer: Text(\"Footer\")) {\n                Text(\"Row 1\")\n                Text(\"Row 2\")\n            }\n        }"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 1,
+    "viewNames": [
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct ContentView: View {\n    var body: some View {\n        List {\n            Section(header: Text(\"Header\"), footer: Text(\"Footer\")) {\n                Text(\"Row 1\")\n                Text(\"Row 2\")\n            }\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    {/* Custom: List {\n            Section(header: Text(\"Header\"), footer: Text(\"Footer\")) {\n    */}\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "ContentView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "List {\n            Section(header: Text(\"Header\"), footer: Text(\"Footer\")) {\n                Text(\"Row 1\")\n                Text(\"Row 2\")\n            }\n        }"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 1,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "ContentView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "List {\n            Section(header: Text(\"Header\"), footer: Text(\"Footer\")) {\n                Text(\"Row 1\")\n                Text(\"Row 2\")\n            }\n        }"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 3055,
+    "rawResponseLength": 3048,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 1066
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 161
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 209
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 146
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 495
+      }
+    ],
+    "filesCount": 7
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": false,
+    "buildOk": false,
+    "buildError": "npm error code ERESOLVE\nnpm error ERESOLVE could not resolve\nnpm error\nnpm error While resolving: react-scripts@5.0.1\nnpm error Found: typescript@5.9.3\nnpm error node_modules/typescript\nnpm error   dev typescript@\"^5.3.0\" from the root project\nnpm error\nnpm error Could not resolve dependency:\nnpm error peerOptional typescript@\"^3.2.1 || ^4\" from react-scripts@5.0.1\nnpm error node_modules/react-scripts\nnpm error   react-scripts@\"5.0.1\" from the root project\nnpm error\nnpm error Conflicting peer dependency: typescript@4.9.5\nnpm error node_modules/typescript\nnpm error   peerOptional typescript@\"^3.2.1 || ^4\" from react-scripts@5.0.1\nnpm error   node_modules/react-scripts\nnpm error     react-scripts@\"5.0.1\" from the root project\nnpm error\nnpm error Fix the upstream dependency conflict, or retry\nnpm error this command with --force or --legacy-peer-deps\nnpm error to accept an incorrect (and potentially broken) dependency resolution.\nnpm error\nnpm error\nnpm error For a full report see:\nnpm error /Users/mprozorskiy/.npm/_logs/2026-03-14T22_08_01_326Z-eresolve-report.txt\nnpm error A complete log of this run can be found in: /Users/mprozorskiy/.npm/_logs/2026-03-14T22_08_01_326Z-debug-0.log\n"
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}

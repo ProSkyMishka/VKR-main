@@ -1,0 +1,223 @@
+{
+  "meta": {
+    "inputFile": "/Users/mprozorskiy/Desktop/VKR/datasets/S3_binding/nested_binding.swift",
+    "outDir": "/Users/mprozorskiy/Desktop/VKR/experiment-output/B0/S3_binding_nested_binding",
+    "startedAt": "2026-03-14T21:31:01.957Z",
+    "finishedAt": "2026-03-14T21:31:14.827Z",
+    "success": true,
+    "totalLlmCalls": 1,
+    "experimentConfig": "B0",
+    "totalPromptTokens": 472,
+    "totalCompletionTokens": 1066,
+    "totalTokens": 1538
+  },
+  "step1_extractor": {
+    "step": "SwiftUI Extractor",
+    "ir": {
+      "views": [
+        {
+          "name": "InnerView",
+          "params": [],
+          "body": {
+            "type": "Button",
+            "props": {},
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": [
+              {
+                "name": "x",
+                "type": "Int"
+              }
+            ]
+          }
+        },
+        {
+          "name": "MiddleView",
+          "params": [],
+          "body": {
+            "type": "Custom",
+            "props": {
+              "raw": "InnerView(x: $x)"
+            },
+            "modifiers": [],
+            "children": []
+          },
+          "state": {
+            "stateVars": [],
+            "bindings": [
+              {
+                "name": "x",
+                "type": "Int"
+              }
+            ]
+          }
+        },
+        {
+          "name": "ContentView",
+          "params": [],
+          "body": {
+            "type": "VStack",
+            "props": {},
+            "modifiers": [],
+            "children": [
+              {
+                "type": "Text",
+                "props": {
+                  "content": "\\(x)"
+                },
+                "modifiers": [],
+                "children": []
+              }
+            ]
+          },
+          "state": {
+            "stateVars": [
+              {
+                "name": "x",
+                "type": "Int",
+                "initial": "0"
+              }
+            ],
+            "bindings": []
+          }
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "viewsCount": 3,
+    "viewNames": [
+      "InnerView",
+      "MiddleView",
+      "ContentView"
+    ],
+    "entryViewName": "ContentView",
+    "swiftSourcePreview": "import SwiftUI\nstruct InnerView: View {\n    @Binding var x: Int\n    var body: some View { Button(\"Inner\") { x += 1 } }\n}\nstruct MiddleView: View {\n    @Binding var x: Int\n    var body: some View { InnerView(x: $x) }\n}\nstruct ContentView: View {\n    @State private var x = 0\n    var body: some View {\n        VStack {\n            Text(\"\\(x)\")\n            MiddleView(x: $x)\n        }\n    }\n}\n"
+  },
+  "step2_rules": {
+    "step": "Rule Mapper",
+    "webIR": {
+      "skeleton": [
+        {
+          "viewName": "InnerView",
+          "propsInterface": "interface InnerViewProps {\n  x: number;\n  onXChange?: (value: number) => void;\n}",
+          "stateHooks": [],
+          "bindingProps": [
+            "x, onXChange"
+          ],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <button type=\"button\" onClick={() => {}} style={{ border: 'none', background: 'none', color: '#007AFF', cursor: 'pointer', padding: 0, fontSize: 'inherit' }}>\n\n    </button>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "MiddleView",
+          "propsInterface": "interface MiddleViewProps {\n  x: number;\n  onXChange?: (value: number) => void;\n}",
+          "stateHooks": [],
+          "bindingProps": [
+            "x, onXChange"
+          ],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    {/* Custom: InnerView(x: $x) */}\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        },
+        {
+          "viewName": "ContentView",
+          "propsInterface": "interface ContentViewProps {\n  // no props\n}",
+          "stateHooks": [
+            "const [x, setX] = useState<number>(0);"
+          ],
+          "bindingProps": [],
+          "jsxSkeleton": "  <div style={{ minHeight: '100vh', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>\n    <div style={ display: 'flex', flexDirection: 'column', gap: 8, alignItems: 'center' }>\n      <span>\\(x)</span>\n    </div>\n  </div>",
+          "imports": [
+            "import React, { useState } from \"react\";"
+          ]
+        }
+      ],
+      "unresolved": [
+        {
+          "viewName": "MiddleView",
+          "location": "body",
+          "description": "Custom/unparsed body",
+          "rawSwift": "InnerView(x: $x)"
+        }
+      ],
+      "entryViewName": "ContentView"
+    },
+    "skeletonCount": 3,
+    "unresolvedCount": 1,
+    "unresolvedList": [
+      {
+        "viewName": "MiddleView",
+        "location": "body",
+        "description": "Custom/unparsed body",
+        "rawSwift": "InnerView(x: $x)"
+      }
+    ]
+  },
+  "step3_rag": {
+    "step": "RAG Retriever",
+    "retrievedCount": 0,
+    "retrievedIds": [],
+    "retrievedTags": [],
+    "ragContextLength": 22
+  },
+  "step4_llm": {
+    "step": "LLM Generator",
+    "promptLength": 1476,
+    "rawResponseLength": 2855,
+    "filesGenerated": [
+      {
+        "path": "package.json",
+        "contentLength": 435
+      },
+      {
+        "path": "vite.config.ts",
+        "contentLength": 131
+      },
+      {
+        "path": "tsconfig.json",
+        "contentLength": 504
+      },
+      {
+        "path": "index.html",
+        "contentLength": 302
+      },
+      {
+        "path": "src/main.tsx",
+        "contentLength": 223
+      },
+      {
+        "path": "src/App.tsx",
+        "contentLength": 136
+      },
+      {
+        "path": "src/views/InnerView.tsx",
+        "contentLength": 300
+      },
+      {
+        "path": "src/views/MiddleView.tsx",
+        "contentLength": 321
+      },
+      {
+        "path": "src/views/ContentView.tsx",
+        "contentLength": 271
+      }
+    ],
+    "filesCount": 9
+  },
+  "step5_validation": {
+    "step": "Validator",
+    "success": true,
+    "buildOk": true
+  },
+  "step6_repair": {
+    "step": "Repair Loop",
+    "totalIterations": 0,
+    "iterations": [],
+    "limitReached": false
+  }
+}
