@@ -1,4 +1,0 @@
-> vite-react-ts@0.0.0 build
-> tsc && vite build
-
-src/App.tsx(6,6): error TS2741: Property 'onPress' is missing in type '{}' but required in type 'ContentViewProps'.

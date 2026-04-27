@@ -1,0 +1,38 @@
+import React from 'react';
+import { render, screen } from '@testing-library/react';
+import App from './App';
+
+function findAncestorMatching(start: HTMLElement, re: RegExp): HTMLElement | null {
+  let cur: HTMLElement | null = start;
+  while (cur) {
+    const s = cur.getAttribute('style') || '';
+    if (re.test(s)) return cur;
+    cur = cur.parentElement;
+  }
+  return null;
+}
+
+describe('S1 layout: tile_grid_013', () => {
+  it('shows expected text', () => {
+    render(<App />);
+    expect(screen.getByText(/tg013-t1/i)).toBeInTheDocument();
+    expect(screen.getByText(/tg013-t2/i)).toBeInTheDocument();
+    expect(screen.getByText(/tg013-t3/i)).toBeInTheDocument();
+    expect(screen.getByText(/tg013-t4/i)).toBeInTheDocument();
+    expect(screen.getByText(/tg013-t5/i)).toBeInTheDocument();
+    expect(screen.getByText(/tg013-t6/i)).toBeInTheDocument();
+    expect(screen.getByText(/tg013-t7/i)).toBeInTheDocument();
+    expect(screen.getByText(/tg013-t8/i)).toBeInTheDocument();
+    expect(screen.getByText(/tg013-t9/i)).toBeInTheDocument();
+  });
+
+  it('has expected styling', () => {
+    render(<App />);
+    const el = screen.getByText(/tg013-t1/i) as HTMLElement;
+    expect(findAncestorMatching(el, /(?:^|;|\s)background-color:\s*(?:purple|#?AF52DE|rgb\(\s*175\s*,\s*82|#?800080|rgb\(\s*128\s*,\s*0\s*,\s*128)/i)).not.toBeNull();
+    expect(findAncestorMatching(el, /(?:^|;|\s)color:\s*(?:white|#?[Ff]{3}(?:[Ff]{3})?\b|rgb\(\s*255\s*,\s*255\s*,\s*255\))/i)).not.toBeNull();
+    expect(findAncestorMatching(el, /(?:^|;|\s)border-radius:\s*\d/i)).not.toBeNull();
+    expect(findAncestorMatching(el, /(?:^|;|\s)width:\s*\d/i)).not.toBeNull();
+    expect(findAncestorMatching(el, /(?:^|;|\s)height:\s*\d/i)).not.toBeNull();
+  });
+});

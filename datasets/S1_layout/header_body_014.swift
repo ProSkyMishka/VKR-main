@@ -1,0 +1,35 @@
+import SwiftUI
+
+struct ContentView: View {
+    var body: some View {
+        VStack(spacing: 0) {
+            HStack {
+                Text("hb014-headline")
+                    .font(.title)
+                    .bold()
+                Spacer()
+                Text("hb014-tagline")
+                    .font(.caption)
+                    .foregroundColor(.gray)
+            }
+            .padding()
+            .background(Color(white: 0.96))
+            VStack(alignment: .leading, spacing: 8) {
+                Text("hb014-content paragraph")
+                    .font(.body)
+                Text("hb014-extra")
+                    .font(.subheadline)
+                    .foregroundColor(.secondary)
+            }
+            .padding()
+            HStack {
+                Spacer()
+                Text("hb014-footer")
+                    .font(.footnote)
+                    .foregroundColor(.gray)
+                Spacer()
+            }
+            .padding(.bottom, 8)
+        }
+    }
+}

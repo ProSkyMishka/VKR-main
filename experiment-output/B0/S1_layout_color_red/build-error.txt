@@ -1,7 +1,0 @@
-> swiftui-to-vite-react@0.0.0 build
-> tsc && vite build
-
-src/views/ContentViewStyles.tsx(1,20): error TS2307: Cannot find module 'styled-components' or its corresponding type declarations.
-src/views/ContentViewStyles.tsx(15,23): error TS7006: Parameter 'props' implicitly has an 'any' type.
-src/views/ContentViewStyles.tsx(18,5): error TS7006: Parameter 'props' implicitly has an 'any' type.
-src/views/ContentViewStyles.tsx(28,12): error TS7006: Parameter 'props' implicitly has an 'any' type.

@@ -1,0 +1,19 @@
+import SwiftUI
+
+struct Editbsa003: View {
+    @Binding var text: String
+    var body: some View {
+        Button("bsa003-append") { text += "x" }
+    }
+}
+
+struct ContentView: View {
+    @State private var s = "bsa003-init"
+    var body: some View {
+        VStack {
+            Text(s)
+            Editbsa003(text: $s)
+        }
+        .padding()
+    }
+}

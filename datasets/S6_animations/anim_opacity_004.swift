@@ -1,0 +1,14 @@
+import SwiftUI
+
+struct ContentView: View {
+    @State private var on = false
+    var body: some View {
+        VStack {
+            Text("ao004-fade")
+                .opacity(on ? 1 : 0)
+                .animation(.easeInOut, value: on)
+            Button("ao004-toggle") { on.toggle() }
+        }
+        .padding()
+    }
+}

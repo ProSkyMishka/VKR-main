@@ -1,5 +1,0 @@
-> swiftui-to-vite-react@0.0.0 build
-> tsc && vite build
-
-src/views/ContentView.tsx(8,8): error TS2304: Cannot find name 'VStack'.
-src/views/ContentView.tsx(15,9): error TS2304: Cannot find name 'VStack'.

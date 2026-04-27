@@ -1,4 +1,0 @@
-> swiftui-to-vite-react@0.0.0 build
-> tsc && vite build
-
-src/App.tsx(5,11): error TS2741: Property 'title' is missing in type '{}' but required in type 'DetailViewProps'.
