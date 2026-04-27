@@ -1,6 +1,8 @@
 import { spawnSync } from 'child_process';
 import path from 'path';
+import { fileURLToPath } from 'url';
 import fs from 'fs/promises';
+import fsSync from 'fs';
 
 export interface ValidationResult {
   success: boolean;
@@ -9,6 +11,10 @@ export interface ValidationResult {
   testOk?: boolean;
   testError?: string;
 }
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const INJECT_TESTS_SCRIPT = path.resolve(__dirname, '..', '..', 'scripts', 'inject-and-run-tests.js');
 
 const FALLBACK_PACKAGE_JSON = {
   name: 'generated-app',
@@ -196,7 +202,10 @@ async function ensureTsConfigNoBrokenRefs(outDir: string): Promise<void> {
   if (fixed !== content) await fs.writeFile(tsconfigPath, fixed, 'utf-8');
 }
 
-export async function validateProject(outDir: string): Promise<ValidationResult> {
+export async function validateProject(
+  outDir: string,
+  specPath?: string
+): Promise<ValidationResult> {
   const packagePath = path.join(outDir, 'package.json');
   try {
     await fs.access(packagePath);
@@ -220,7 +229,20 @@ export async function validateProject(outDir: string): Promise<ValidationResult>
     return { success: false, buildOk: false, buildError: msg };
   }
 
-  return { success: true, buildOk: true };
+  if (!specPath || !fsSync.existsSync(specPath) || !fsSync.existsSync(INJECT_TESTS_SCRIPT)) {
+    return { success: true, buildOk: true };
+  }
+
+  const testResult = runInjectedTests(outDir, specPath);
+  if (!testResult.success) {
+    return {
+      success: false,
+      buildOk: true,
+      testOk: false,
+      testError: testResult.output || 'Tests failed',
+    };
+  }
+  return { success: true, buildOk: true, testOk: true };
 }
 
 function runNpmInstall(outDir: string): { success: boolean; stderr: string } {
@@ -247,4 +269,15 @@ function runBuild(outDir: string): { success: boolean; stdout: string; stderr: s
     stdout: r.stdout || '',
     stderr: r.stderr || '',
   };
+}
+
+function runInjectedTests(outDir: string, specPath: string): { success: boolean; output: string } {
+  const r = spawnSync(process.execPath, [INJECT_TESTS_SCRIPT, outDir, specPath], {
+    cwd: path.resolve(INJECT_TESTS_SCRIPT, '..', '..'),
+    encoding: 'utf-8',
+    stdio: ['ignore', 'pipe', 'pipe'],
+    env: { ...process.env },
+  });
+  const output = [r.stdout, r.stderr].filter(Boolean).join('\n').trim();
+  return { success: r.status === 0, output };
 }

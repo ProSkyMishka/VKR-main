@@ -10,6 +10,7 @@ import { mapToWebIR } from './rules/index.js';
 import {
   generate,
   writeGeneratedFiles,
+  removeStrayTestFiles,
   ensureEntryViewFile,
   ensureAppRendersEntry,
   ensureMinimalProjectStructure,
@@ -48,10 +49,13 @@ async function main(): Promise<void> {
   const inputIndex = args.findIndex((a) => a.endsWith('.swift'));
   const outIndex = args.indexOf('--out');
   const configIndex = args.indexOf('--config');
+  const specIndex = args.indexOf('--spec');
   const inputFileRaw = inputIndex >= 0 ? args[inputIndex] : null;
   const inputFile = inputFileRaw ? (path.isAbsolute(inputFileRaw) ? inputFileRaw : path.resolve(process.cwd(), inputFileRaw)) : null;
   const outDir = outIndex >= 0 && args[outIndex + 1] ? path.resolve(args[outIndex + 1]) : path.resolve('./output');
   const config = (configIndex >= 0 && args[configIndex + 1]) ? (args[configIndex + 1] as string) : 'B3';
+  const specPathRaw = specIndex >= 0 ? args[specIndex + 1] : null;
+  const specPath = specPathRaw ? (path.isAbsolute(specPathRaw) ? specPathRaw : path.resolve(process.cwd(), specPathRaw)) : null;
   const VALID_CONFIGS = ['B0raw', 'B0', 'B1', 'B2', 'B3'];
   if (!VALID_CONFIGS.includes(config)) {
     console.error('Invalid --config. Use B0raw|B0|B1|B2|B3');
@@ -63,7 +67,7 @@ async function main(): Promise<void> {
   const pureLLM = config === 'B0raw';
 
   if (!inputFile) {
-    console.error('Usage: swiftui2react <input.swift> [--out <dir>] [--config B0raw|B0|B1|B2|B3]');
+    console.error('Usage: swiftui2react <input.swift> [--out <dir>] [--config B0raw|B0|B1|B2|B3] [--spec <file.spec.tsx>]');
     process.exit(1);
   }
 
@@ -169,6 +173,7 @@ async function main(): Promise<void> {
     entryViewName: webIR.entryViewName,
   });
   await writeGeneratedFiles(outDir, normalizedFiles);
+  await removeStrayTestFiles(outDir);
   await ensureViewFilesByName(outDir);
   await ensureDefaultImportsInViews(outDir);
   await ensureEntryScreenSwitchButton(outDir, webIR.entryViewName);
@@ -182,7 +187,8 @@ async function main(): Promise<void> {
   let totalPromptTokens = generateReport?.usage?.prompt_tokens ?? 0;
   let totalCompletionTokens = generateReport?.usage?.completion_tokens ?? 0;
 
-  let validation = await validateProject(outDir);
+  const specForValidator = useRepair ? specPath ?? undefined : undefined;
+  let validation = await validateProject(outDir, specForValidator);
   let repairCount = 0;
 
   if (useRepair) {
@@ -211,6 +217,7 @@ async function main(): Promise<void> {
       });
       await applyRepairFiles(outDir, repairedNormalized);
       lastResult = { ...repairResult, files: repairedNormalized };
+      await removeStrayTestFiles(outDir);
       await ensureViewFilesByName(outDir);
       await ensureDefaultImportsInViews(outDir);
       await ensureEntryScreenSwitchButton(outDir, webIR.entryViewName);
@@ -218,7 +225,7 @@ async function main(): Promise<void> {
       await ensureFrameDivsCenter(outDir);
       await ensureAppRendersEntry(outDir, webIR.entryViewName);
     }
-    validation = await validateProject(outDir);
+    validation = await validateProject(outDir, specForValidator);
     repairIterations.push({
       iteration: repairCount,
       validationError,

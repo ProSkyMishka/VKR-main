@@ -15,7 +15,7 @@ const VIEW_BUILDERS = [
 ];
 
 function skipSpaces(s: string, i: number): number {
-  while (i < s.length && /[\s\n]/.test(s[i])) i++;
+  while (i < s.length && /[\s\n;,]/.test(s[i])) i++;
   return i;
 }
 
@@ -44,12 +44,72 @@ function findClosingBrace(s: string, start: number): number {
   return depth === 0 ? i - 1 : -1;
 }
 
+function readBalancedArgs(s: string, openIdx: number): { args: string; end: number } | null {
+  if (s[openIdx] !== '(') return null;
+  let depth = 0;
+  let i = openIdx;
+  let inString = false;
+  while (i < s.length) {
+    const c = s[i];
+    if (inString) {
+      if (c === '\\') { i += 2; continue; }
+      if (c === '"') inString = false;
+      i++;
+      continue;
+    }
+    if (c === '"') { inString = true; i++; continue; }
+    if (c === '(') depth++;
+    else if (c === ')') {
+      depth--;
+      if (depth === 0) return { args: s.slice(openIdx + 1, i), end: i + 1 };
+    }
+    i++;
+  }
+  return null;
+}
+
+function consumeModifierChain(s: string, start: number): number {
+  let i = start;
+  while (i < s.length) {
+    while (i < s.length && /\s/.test(s[i])) i++;
+    if (s[i] !== '.') break;
+    const nameMatch = s.slice(i + 1).match(/^(\w+)/);
+    if (!nameMatch) break;
+    let pos = i + 1 + nameMatch[1].length;
+    if (s[pos] === '(') {
+      const balanced = readBalancedArgs(s, pos);
+      if (!balanced) break;
+      pos = balanced.end;
+    }
+    i = pos;
+  }
+  return i;
+}
+
 function parseModifiers(tail: string): ModifierDef[] {
   const modifiers: ModifierDef[] = [];
-  const modRe = /\.(\w+)(?:\(([^)]*)\))?/g;
-  let m: RegExpExecArray | null;
-  while ((m = modRe.exec(tail)) !== null) {
-    modifiers.push({ name: m[1], args: m[2]?.trim() ? [m[2].trim()] : undefined });
+  let i = 0;
+  // Цепочка модификаторов идёт сразу после view-вычисления:
+  // только пробелы/переводы строк могут разделять `.foo(...)` друг от друга.
+  // Любой другой символ (буква, скобка, цифра — например, начало следующего
+  // sibling-view) означает конец цепочки — иначе мы съедим модификаторы
+  // следующего элемента.
+  while (i < tail.length) {
+    while (i < tail.length && /\s/.test(tail[i])) i++;
+    if (tail[i] !== '.') break;
+    const nameMatch = tail.slice(i + 1).match(/^(\w+)/);
+    if (!nameMatch) break;
+    const name = nameMatch[1];
+    let pos = i + 1 + name.length;
+    let argStr: string | undefined;
+    if (tail[pos] === '(') {
+      const balanced = readBalancedArgs(tail, pos);
+      if (!balanced) break;
+      argStr = balanced.args.trim() || undefined;
+      pos = balanced.end;
+    }
+    modifiers.push({ name, args: argStr ? [argStr] : undefined });
+    i = pos;
   }
   return modifiers;
 }
@@ -75,11 +135,8 @@ function parseChildren(source: string): ComponentNode[] {
         modifiers: mods,
         children: [],
       });
-      let pos = match[0].length;
-      const modRe = /\.\w+(?:\([^)]*\))?/g;
-      let modM: RegExpExecArray | null;
-      while ((modM = modRe.exec(rest.slice(pos)))) pos += modM[0].length;
-      i += pos;
+      const afterText = consumeModifierChain(rest, match[0].length);
+      i += afterText;
       i = skipSpaces(source, i);
       continue;
     }
@@ -95,11 +152,8 @@ function parseChildren(source: string): ComponentNode[] {
           modifiers: mods,
           children: [],
         });
-        let pos = closeBrace + 1 - i;
-        const modRe2 = /\.\w+(?:\([^)]*\))?/g;
-        let modM2: RegExpExecArray | null;
-        while ((modM2 = modRe2.exec(after))) pos += modM2[0].length;
-        i += pos;
+        const afterMods = consumeModifierChain(source, closeBrace + 1);
+        i = afterMods;
       } else {
         i++;
       }
@@ -112,17 +166,44 @@ function parseChildren(source: string): ComponentNode[] {
       i = skipSpaces(source, i);
       continue;
     }
-    if ((match = rest.match(/^Color\.(\w+)(\.\w+(?:\([^)]*\))?)*/))) {
+    if ((match = rest.match(/^Divider\s*\(\s*\)/))) {
+      children.push({ type: 'Divider', props: {}, modifiers: [], children: [] });
+      i += match[0].length;
+      i = skipSpaces(source, i);
+      continue;
+    }
+    if (rest.startsWith('Image(')) {
+      const balanced = readBalancedArgs(rest, 'Image'.length);
+      if (balanced) {
+        const argText = balanced.args;
+        const sysMatch = argText.match(/systemName:\s*"([^"]+)"/);
+        const nameMatch = argText.match(/^"([^"]+)"/);
+        const name = sysMatch ? sysMatch[1] : nameMatch ? nameMatch[1] : argText.trim();
+        const afterModsEnd = consumeModifierChain(rest, balanced.end);
+        const mods = parseModifiers(rest.slice(balanced.end, afterModsEnd));
+        children.push({
+          type: 'Image',
+          props: { name, isSystem: !!sysMatch },
+          modifiers: mods,
+          children: [],
+        });
+        i += afterModsEnd;
+        i = skipSpaces(source, i);
+        continue;
+      }
+    }
+    if ((match = rest.match(/^Color\.(\w+)/))) {
       const colorName = match[1];
-      const afterColor = match[0].slice(6 + colorName.length);
-      const mods = parseModifiers(afterColor);
+      const afterStart = match[0].length;
+      const afterMods = consumeModifierChain(rest, afterStart);
+      const mods = parseModifiers(rest.slice(afterStart, afterMods));
       children.push({
         type: 'Color',
         props: { name: colorName },
         modifiers: mods,
         children: [],
       });
-      i += match[0].length;
+      i += afterMods;
       i = skipSpaces(source, i);
       continue;
     }
@@ -130,7 +211,10 @@ function parseChildren(source: string): ComponentNode[] {
       if (viewName === 'Text' || viewName === 'Button') continue;
       const openRe = new RegExp(`^${viewName}\\s*\\(([^)]*)\\)\\s*\\{`);
       const simpleRe = new RegExp(`^${viewName}\\s*\\(\\s*\\{\\s*\\}`);
-      const noParenRe = viewName === 'NavigationView' ? /^NavigationView\s*\{/ : null;
+      // Inline-форма без скобок: `VStack { ... }`, `HStack { ... }`, `ZStack { ... }`,
+      // `NavigationView { ... }`, `NavigationStack { ... }`.
+      const noParenAllowed = ['VStack', 'HStack', 'ZStack', 'NavigationView', 'NavigationStack'];
+      const noParenRe = noParenAllowed.includes(viewName) ? new RegExp(`^${viewName}\\s*\\{`) : null;
       match = rest.match(openRe) || rest.match(simpleRe) || (noParenRe && rest.match(noParenRe));
       if (match) {
         type = viewName;
@@ -167,10 +251,7 @@ function parseChildren(source: string): ComponentNode[] {
           children: childNodes,
         });
         i = skipSpaces(source, closeBrace + 1);
-        const modRe2 = /\.\w+(?:\([^)]*\))?/g;
-        const afterStr = source.slice(i);
-        let modM2: RegExpExecArray | null;
-        while ((modM2 = modRe2.exec(afterStr))) i += modM2[0].length;
+        i = consumeModifierChain(source, i);
         i = skipSpaces(source, i);
         break;
       }

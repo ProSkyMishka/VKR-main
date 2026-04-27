@@ -47,12 +47,55 @@ export async function ensureFrameDivsCenter(outDir: string): Promise<void> {
   }
 }
 
+// Спек-файлы LLM иногда подсовывает «по аналогии» с примерами в RAG-контексте,
+// но в собираемом проекте нет devDeps `vitest`/`@testing-library/react`, и `tsc`
+// падает на этих импортах. Тесты инжектятся отдельным скриптом
+// (scripts/inject-and-run-tests.js), поэтому в самом проекте они не нужны.
+function isStrayTestFile(p: string): boolean {
+  const base = path.basename(p);
+  return /\.(spec|test)\.(tsx?|jsx?)$/i.test(base);
+}
+
 export async function writeGeneratedFiles(outDir: string, files: { path: string; content: string }[]): Promise<void> {
   for (const f of files) {
+    if (isStrayTestFile(f.path)) continue;
     const fullPath = path.join(outDir, f.path);
     await fs.mkdir(path.dirname(fullPath), { recursive: true });
     await fs.writeFile(fullPath, f.content, 'utf-8');
   }
+}
+
+export async function removeStrayTestFiles(outDir: string): Promise<number> {
+  let removed = 0;
+  async function walk(dir: string): Promise<void> {
+    let entries: string[];
+    try {
+      entries = await fs.readdir(dir);
+    } catch {
+      return;
+    }
+    for (const name of entries) {
+      const full = path.join(dir, name);
+      let stat;
+      try {
+        stat = await fs.stat(full);
+      } catch {
+        continue;
+      }
+      if (stat.isDirectory()) {
+        if (name === 'node_modules' || name === '.git') continue;
+        await walk(full);
+      } else if (isStrayTestFile(full)) {
+        try {
+          await fs.unlink(full);
+          removed++;
+        } catch {
+        }
+      }
+    }
+  }
+  await walk(outDir);
+  return removed;
 }
 
 export async function ensureEntryViewFile(outDir: string, entryViewName: string): Promise<void> {

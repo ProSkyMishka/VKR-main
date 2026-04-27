@@ -68,6 +68,7 @@ export async function generate(
 export { chat, buildGenerationPrompt, parseGeneratedFiles };
 export {
   writeGeneratedFiles,
+  removeStrayTestFiles,
   ensureEntryViewFile,
   ensureAppRendersEntry,
   ensureMinimalProjectStructure,

@@ -62,6 +62,7 @@ export async function applyRepairFiles(
   files: { path: string; content: string }[]
 ): Promise<void> {
   for (const f of files) {
+    if (/\.(spec|test)\.(tsx?|jsx?)$/i.test(path.basename(f.path))) continue;
     const fullPath = path.join(outDir, f.path);
     await fs.mkdir(path.dirname(fullPath), { recursive: true });
     await fs.writeFile(fullPath, f.content, 'utf-8');
